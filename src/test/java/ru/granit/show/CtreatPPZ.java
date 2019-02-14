@@ -207,7 +207,7 @@ public class CtreatPPZ {
         Thread.sleep(2000);
 
         //введем ответственных лиц
-        //отв за формир.обосн.
+        //отв за формир.обоснования.
         WebElement elementButtonOtvLic = webDriver.findElement(By.xpath("//*[@id=\"accordion7\"]/div/div[1]/h2"));
         elementButtonOtvLic.click();
         Thread.sleep(2000);

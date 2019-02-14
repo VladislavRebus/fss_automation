@@ -12,7 +12,10 @@ import org.testng.annotations.Test;
 public class VygruzPechFormPZ {
     WebDriver webDriver;
 
-    @BeforeClass
+    public void predTest() {                 //не могу сослаться на BaseTest и он не импортируется
+        BaseTest baseTest = new BaseTest();
+    }
+/*    @BeforeClass
     public void initializationDriver() {
         System.out.println("Тестируем в Google Chrome");
         System.setProperty("webdriver.chrome.driver", "D:\\WorkAutomation\\FondSocStrahovaniya\\src\\main\\resources\\chromedriver.exe");
@@ -24,9 +27,10 @@ public class VygruzPechFormPZ {
         webDriver.manage().window().maximize();
         webDriver.get("http://show.granit.ru/test/fss/#/PlanPurchase?id=1118414");
     }
-
+*/
     @Test
     public void openPPZ() throws InterruptedException {
+
 
         //вход
         String login = "saratovsch";
