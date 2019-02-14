@@ -24,8 +24,6 @@ public class BaseTest {
 
     @AfterSuite
     public void closeDriver() {
-        webDriver.close();
+        webDriver.quit();
     }
-
-
 }

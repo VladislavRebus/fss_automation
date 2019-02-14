@@ -1,37 +1,13 @@
 package ru.granit.show;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class VygruzPechFormPZ {
-    WebDriver webDriver;
-
-    public void predTest() {                 //не могу сослаться на BaseTest и он не импортируется
-        BaseTest baseTest = new BaseTest();
-    }
-/*    @BeforeClass
-    public void initializationDriver() {
-        System.out.println("Тестируем в Google Chrome");
-        System.setProperty("webdriver.chrome.driver", "D:\\WorkAutomation\\FondSocStrahovaniya\\src\\main\\resources\\chromedriver.exe");
-        webDriver = new ChromeDriver();
-    }
-
-    @BeforeMethod
-    public void openAdress() {
-        webDriver.manage().window().maximize();
-        webDriver.get("http://show.granit.ru/test/fss/#/PlanPurchase?id=1118414");
-    }
-*/
+public class VygruzPechFormPZ extends BaseTest {
     @Test
-    public void openPPZ() throws InterruptedException {
-
-
+    public void openTest() throws InterruptedException {
         //вход
         String login = "saratovsch";
         String password = "SHETKO1990";
@@ -81,9 +57,6 @@ public class VygruzPechFormPZ {
         //Выбираем- Сформировать обоснование по 555 ПП Excel
         WebElement formirObocnov555ppExcel = webDriver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/div/div/div[1]/div[2]/div/ul/li[10]/a"));
         formirObocnov555ppExcel.click();
-
-        //далее остается в ручную подтвердить скачивание и все. документы загрузятся в ту папку для загрузок,
-        // которую выбрали ранее(либо в папку по умолчанию GoogleGhrome).
-
+        Thread.sleep(3000);
     }
 }

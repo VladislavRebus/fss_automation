@@ -2,30 +2,11 @@ package ru.granit.show;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class SoglasovPZ {
-    WebDriver webDriver;
-
-    @BeforeClass
-    public void initializationDriver() {
-        System.out.println("Тестируем в Google Chrome");
-        System.setProperty("webdriver.chrome.driver", "D:\\WorkAutomation\\FondSocStrahovaniya\\src\\main\\resources\\chromedriver.exe");
-        webDriver = new ChromeDriver();
-    }
-
-    @BeforeMethod
-    public void openAdress() {
-        webDriver.manage().window().maximize();
-        webDriver.get("http://show.granit.ru/test/fss/#/PlanPurchase?id=1118414");
-    }
-
+public class SoglasovPZ extends BaseTest {
     @Test
     public void openPPZ() throws InterruptedException {
 
@@ -45,10 +26,10 @@ public class SoglasovPZ {
         elementButtonEnter.click();
         Thread.sleep(6000);
 
-         //закрытие оповещения
+        //закрытие оповещения
         WebElement opoveshenie = webDriver.findElement(By.xpath("/html/body/div[13]/div/div/div[3]/div/div[1]/div"));
         opoveshenie.click();
-       Thread.sleep(2000);
+        Thread.sleep(2000);
 
         //проверим номер плана закупок
         WebElement elementNumberPlan = webDriver.findElement(By.xpath("//*[@id=\"mainDataPanel\"]/div/form/fieldset/div[6]/div[1]/input"));
@@ -113,11 +94,6 @@ public class SoglasovPZ {
         Thread.sleep(2000);
         WebElement otpravkaNaSoglasov = webDriver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/div/div/div[1]/div[2]/div/ul/li[13]/a"));
         otpravkaNaSoglasov.click();
-        Thread.sleep(2000);
-
-
-
-
-
+        Thread.sleep(3000);
     }
 }

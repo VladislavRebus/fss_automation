@@ -2,32 +2,13 @@ package ru.granit.show;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class CtreatPPZ {
-    WebDriver webDriver;
-
-    @BeforeClass
-    public void initializationDriver() {
-        System.out.println("Тестируем в Google Chrome");
-        System.setProperty("webdriver.chrome.driver", "D:\\WorkAutomation\\FondSocStrahovaniya\\src\\main\\resources\\chromedriver.exe");
-        webDriver = new ChromeDriver();
-    }
-
-    @BeforeMethod
-    public void openAdress() {
-        webDriver.manage().window().maximize();
-        webDriver.get("http://show.granit.ru/test/fss/#/PlanPurchase?id=1118414");
-    }
-
+public class CreatePPZ extends BaseTest {
     @Test
-    public void openPPZ() throws InterruptedException {
+    public void openTest() throws InterruptedException {
 
         //вход
         String login = "saratovsch";
@@ -259,9 +240,7 @@ public class CtreatPPZ {
 
         WebElement finalPodtv = webDriver.findElement(By.xpath("/html/body/div[32]/div/div/div[3]/button[2]"));
         finalPodtv.click();
-
-
-
+        Thread.sleep(3000);
 /*
         //Выбираем тип закупки (8)
         WebElement tipZak = webDriver.findElement(By.xpath("//*[@id=\"mainDataPanel\"]/div/form/fieldset/div[8]/div/div/core-combo/div/div/span/span/span"));
@@ -271,7 +250,5 @@ public class CtreatPPZ {
         vybor2.click();
         Thread.sleep(1000);
 */
-
-
     }
 }
