@@ -1,0 +1,63 @@
+# tmp
+tmp
+
+# Mac-specific
+.DS_Store
+
+# Maven
+target
+
+# Gradle
+.gradle/
+build/
+out/
+
+# IntelliJ IDEA
+.idea/
+.idea*
+*.iml
+*.ipr
+*.iws
+*.ids
+atlassian-ide-plugin.xml
+
+# Eclipse
+.project
+.classpath
+.settings/
+.cache
+
+# Binaries
+bin/
+
+# JPA Generated class
+*_.java
+
+# MS Office tmp files
+~$*
+
+# Own logs
+logs/
+*.log
+
+# EclipseLink-generated SQL
+*.jdbc
+
+# Derby logs (from integration tests)
+derby.log
+
+
+# Sublime project files
+*.sublime-project
+*.sublime-workspace
+# emacs tmp files
+*~
+
+# Vagrant vm files
+.vagrant
+
+# vim files
+*tags*
+*.swp
+*~
+
