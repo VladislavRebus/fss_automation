@@ -55,4 +55,8 @@ public class BaseTest {
     protected Logger getLogger(){
         return testLogger.getLogger();
     }
+
+    protected WebDriver getDriver() {
+        return webDriver;
+    }
 }
