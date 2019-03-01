@@ -13,11 +13,11 @@ public class CreatePPZ extends BaseTest {
         //вход
         String login = "saratovsch";
         String password = "SHETKO1990";
-        String reestrNumber = "000060-19";
+        String registryNumber = "000060-19";
         String numIKZ = "3301";
-        String godRazmeshen = "2019";
-        String objZak = "Партия кожаных дипломатов MAKEY";
-        String obocnovanie = "Прямая необходимость";
+        String year = "2019";
+        String nameObjectPurch = "Партия кожаных дипломатов MAKEY";
+        String justification = "Прямая необходимость";
         String time2 = "эти буквы должны быть здесь";
         String sum = "75000000";
         WebElement elementLog = webDriver.findElement(By.id("loginTxt"));
@@ -29,217 +29,216 @@ public class CreatePPZ extends BaseTest {
         Thread.sleep(2000);
 
 
-        //проверим номер плана закупок
+        getLogger().info("Check the purchase plan number");
         WebElement elementNumberPlan = webDriver.findElement(By.xpath("//*[@id=\"mainDataPanel\"]/div/form/fieldset/div[6]/div[1]/input"));
-        Assert.assertEquals(elementNumberPlan.getAttribute("value"), reestrNumber);
+        Assert.assertEquals(elementNumberPlan.getAttribute("value"), registryNumber);
 
-        //создадим объект закупки (2)
+        getLogger().info("Create a purchase object (2)");
         WebElement createObjectZak = webDriver.findElement(By.xpath("//*[@id=\"specificationsPanel\"]/div/div[1]/div[2]/button[1]"));
         createObjectZak.click();
         Thread.sleep(2000);
 
-        //пробуем сохранить (3)
+        getLogger().info("Save button");
         WebElement saveButton = webDriver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/div/div/div[1]/div[2]/button[1]"));
         saveButton.click();
         Thread.sleep(2000);
 
-        //Закрываем оповещение
-        WebElement closeWarningTab = webDriver.findElement((By.xpath("/html/body/div[21]/div/div/div[3]/button")));
-        closeWarningTab.click();
+        getLogger().info("Close the alert (3)");
+        WebElement closeAlertTab = webDriver.findElement(By.xpath("/html/body/div[21]/div/div/div[3]/button"));
+        closeAlertTab.click();
         Thread.sleep(2000);
 
-        //Вводим порядковый номер для ИКЗ (4)
+        getLogger().info("Enter the sequence number for IKZ (4)");
         WebElement numberIKZ = webDriver.findElement(By.xpath("//*[@id=\"mainDataPanel\"]/div/form/fieldset/div[5]/div/input"));
         System.out.println("Вводим" + numIKZ);
         numberIKZ.sendKeys(numIKZ);
 
-        //Пробуем сохранить (5)
+        getLogger().info("Save button (5)");
         saveButton.click();
         Thread.sleep(2000);
 
-        //Закрываем оповещение
+        getLogger().info("Close the alert");
         WebElement closeWarningTab2 = webDriver.findElement(By.xpath("/html/body/div[21]/div/div/div[3]/button"));
         closeWarningTab2.click();
         Thread.sleep(2000);
 
-        //Вводим планируемый год размещения (6)
-        WebElement yearRazm = webDriver.findElement(By.xpath("//*[@id=\"mainDataPanel\"]/div/form/fieldset/div[7]/div[2]/div/core-combo/div/div/span/span/input"));
-        yearRazm.sendKeys(godRazmeshen);
+        getLogger().info("Enter the planned placement year (6)");
+        WebElement yearPlacement = webDriver.findElement(By.xpath("//*[@id=\"mainDataPanel\"]/div/form/fieldset/div[7]/div[2]/div/core-combo/div/div/span/span/input"));
+        yearPlacement.sendKeys(year);
         Thread.sleep(2000);
         WebElement vybor = webDriver.findElement(By.xpath("/html/body/div[12]/div/ul/li[1]"));
         vybor.click();
 
-        //Пробуем сохранить (7)
+        getLogger().info("Save button (7)");
         saveButton.click();
         Thread.sleep(2000);
 
-        //Закрываем оповещение
+        getLogger().info("Close the alert");
         WebElement closeWarningTab3 = webDriver.findElement(By.xpath("/html/body/div[21]/div/div/div[3]/button"));
         closeWarningTab3.click();
 
-
+        getLogger().info("Scroll down");
         JavascriptExecutor jse = (JavascriptExecutor) webDriver;
         jse.executeScript("window.scrollBy(0,900)", "");
 
-        //Вводим обоснование соответствия объекта (12)
-        WebElement obocnObj = webDriver.findElement(By.xpath("//*[@id=\"to-purchase\"]"));
-        obocnObj.sendKeys(obocnovanie);
+        getLogger().info("Introduce the justification of the object");//Вводим обоснование соответствия объекта (12)
+        WebElement justificObj = webDriver.findElement(By.xpath("//*[@id=\"to-purchase\"]"));
+        justificObj.sendKeys(justification);
         Thread.sleep(2000);
 
-        // Пробуем сохранить (13)
+        getLogger().info("Save button (13)");
         saveButton.click();
         Thread.sleep(2000);
 
-        //Закрываем оповещение
+        getLogger().info("Close the alert");
         WebElement closeWarningTab6 = webDriver.findElement(By.xpath("/html/body/div[21]/div/div/div[3]/button"));
         closeWarningTab6.click();
         Thread.sleep(2000);
 
-        //Укажем срок и периодичность поставки (14)
-
-        WebElement checkBoxSrok = webDriver.findElement(By.xpath("//*[@id=\"deliveryTerm\"]/div/div/div[1]/label/input"));
-        checkBoxSrok.click();
+        getLogger().info("Specify the time and frequency of delivery");//Укажем срок и периодичность поставки (14)
+        WebElement checkBoxTime = webDriver.findElement(By.xpath("//*[@id=\"deliveryTerm\"]/div/div/div[1]/label/input"));
+        checkBoxTime.click();
+        Thread.sleep(2000);
+        //поле иное
+        WebElement otherwise = webDriver.findElement(By.xpath("//*[@id=\"deliveryTerm\"]/div/div/div[3]/textarea[2]"));
+        otherwise.sendKeys(time2);
         Thread.sleep(2000);
 
-        WebElement poleInoe = webDriver.findElement(By.xpath("//*[@id=\"deliveryTerm\"]/div/div/div[3]/textarea[2]"));
-        poleInoe.sendKeys(time2);
-        Thread.sleep(2000);
-
-        // Пробуем сохранить ()
+        getLogger().info("Save button");
         saveButton.click();
         Thread.sleep(2000);
 
-        //Закрываем оповещение
+        getLogger().info("Close the alert");
         WebElement closeWarningTab7 = webDriver.findElement(By.xpath("/html/body/div[21]/div/div/div[3]/button"));
         closeWarningTab7.click();
         Thread.sleep(2000);
 
-        //скролим вверх
+        getLogger().info("Scroll up");
         jse.executeScript("window.scrollBy(0,-800)", "");
         Thread.sleep(2000);
 
-        //Введем наименование объекта или объектов закупки ()
-        WebElement objectZak = webDriver.findElement(By.xpath("//*[@id=\"mainDataPanel\"]/div/form/fieldset/div[11]/div/div/input"));
-        objectZak.sendKeys(objZak);
+        getLogger().info("Introduce the name of the object or objects of purchase");//Введем наименование объекта или объектов закупки ()
+        WebElement nameObjectPurchElement = webDriver.findElement(By.xpath("//*[@id=\"mainDataPanel\"]/div/form/fieldset/div[11]/div/div/input"));
+        nameObjectPurchElement.sendKeys(nameObjectPurch);
         Thread.sleep(2000);
 
-        //Пробуем сохранить ()
+        getLogger().info("Save button");
         saveButton.click();
         Thread.sleep(4000);
 
-        //Добавим источник финансирования (16)
-        WebElement istFinan = webDriver.findElement(By.xpath("//*[@id=\"accordion2\"]/div/div[2]/button"));
-        istFinan.click();
+        getLogger().info("Add a source of funding (16)");//Добавим источник финансирования (16)
+        WebElement sourceFundButton = webDriver.findElement(By.xpath("//*[@id=\"accordion2\"]/div/div[2]/button"));
+        sourceFundButton.click();
         Thread.sleep(2000);
-        WebElement buttonGod = webDriver.findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[2]/form/div[1]/div[1]/div/div/core-combo/div/div/span/span/span"));
-        buttonGod.click();
+        WebElement buttonYear = webDriver.findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[2]/form/div[1]/div[1]/div/div/core-combo/div/div/span/span/span"));
+        buttonYear.click();
         Thread.sleep(2000);
-        WebElement god2019 = webDriver.findElement(By.xpath("/html/body/div[22]/div/ul/li[1]"));
-        god2019.click();
+        WebElement year2019Button = webDriver.findElement(By.xpath("/html/body/div[22]/div/ul/li[1]"));
+        year2019Button.click();
         Thread.sleep(2000);
         WebElement buttonKbk = webDriver.findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[2]/form/div[1]/div[2]/div[3]/core-combo/div/div/span/span/span"));
         buttonKbk.click();
         Thread.sleep(2000);
-        WebElement kbk149346 = webDriver.findElement(By.xpath("/html/body/div[24]/div/ul/li[1]"));
-        kbk149346.click();
+        WebElement kbk149346Button = webDriver.findElement(By.xpath("/html/body/div[24]/div/ul/li[1]"));
+        kbk149346Button.click();
         Thread.sleep(2000);
-        WebElement buttonLicSchet = webDriver.findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[2]/form/div[3]/div[2]/div/core-combo/div/div/span/span/span"));
-        buttonLicSchet.click();
+        WebElement buttonPersonalAccount = webDriver.findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[2]/form/div[3]/div[2]/div/core-combo/div/div/span/span/span")); //лицевой счет
+        buttonPersonalAccount.click();
         Thread.sleep(2000);
-        WebElement schet05604 = webDriver.findElement(By.xpath("/html/body/div[25]/div/ul/li[1]"));
-        schet05604.click();
+        WebElement account05604 = webDriver.findElement(By.xpath("/html/body/div[25]/div/ul/li[1]")); //номер счета
+        account05604.click();
         Thread.sleep(2000);
-        WebElement summa = webDriver.findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[2]/form/div[4]/div[2]/span/span/input[1]"));
-        summa.sendKeys(sum);
+        WebElement sumElement = webDriver.findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[2]/form/div[4]/div[2]/span/span/input[1]"));
+        sumElement.sendKeys(sum);
         Thread.sleep(2000);
 
-        //Пробуем сохранить (9)
+        getLogger().info("Save button (9)");//Пробуем сохранить (9) - здесь не стандартный локатор
         WebElement buttonSave = webDriver.findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[3]/button[2]"));
         buttonSave.click();
         Thread.sleep(2000);
 
-        //Создадим объект закупки
-        WebElement buttonSozdObjZak = webDriver.findElement(By.xpath("//*[@id=\"accordion8\"]/div/div[2]/button"));
-        buttonSozdObjZak.click();
+        getLogger().info("Create a purchase object");//Создадим объект закупки
+        WebElement buttonPurchaseObjCreate = webDriver.findElement(By.xpath("//*[@id=\"accordion8\"]/div/div[2]/button"));
+        buttonPurchaseObjCreate.click();
         Thread.sleep(2000);
         WebElement buttonPotrIzReestra = webDriver.findElement(By.xpath("/html/body/div[27]/div/div/div[2]/div[1]/div[2]/core-link/div/div[1]/div/button"));
         buttonPotrIzReestra.click();
         Thread.sleep(2000);
-        WebElement objIzReestra701 = webDriver.findElement(By.xpath("//*[@id=\"tsrNeedsGrid\"]/div[2]/table/tbody/tr[1]/td[2]"));
-        objIzReestra701.click();
+        WebElement objFromRegistry701 = webDriver.findElement(By.xpath("//*[@id=\"tsrNeedsGrid\"]/div[2]/table/tbody/tr[1]/td[2]"));
+        objFromRegistry701.click();
         Thread.sleep(2000);
-        WebElement buttonVibor = webDriver.findElement(By.xpath("/html/body/div[29]/div/div/div/div[4]/button[2]"));
-        buttonVibor.click();
+        WebElement buttonChoice = webDriver.findElement(By.xpath("/html/body/div[29]/div/div/div/div[4]/button[2]"));//кнопка выбор
+        buttonChoice.click();
         Thread.sleep(2000);
-        WebElement tipZakaza = webDriver.findElement(By.xpath("/html/body/div[27]/div/div/div[2]/div[3]/div[2]/core-combo/div/div/span/span/span"));
-        tipZakaza.click();
+        WebElement typeOrder = webDriver.findElement(By.xpath("/html/body/div[27]/div/div/div[2]/div[3]/div[2]/core-combo/div/div/span/span/span"));//тип заказа
+        typeOrder.click();
         Thread.sleep(2000);
-        WebElement tovar = webDriver.findElement(By.xpath("/html/body/div[28]/div/ul/li[1]"));
-        tovar.click();
+        WebElement product = webDriver.findElement(By.xpath("/html/body/div[28]/div/ul/li[1]")); //товар
+        product.click();
 
-        //Пробуем сохранить (9)
+        getLogger().info("Save button (9)");//Пробуем сохранить (9) - здесь не стандартный локатор2
         WebElement buttonSave2 = webDriver.findElement(By.xpath("/html/body/div[27]/div/div/div[3]/button[2]"));
         buttonSave2.click();
         Thread.sleep(2000);
 
 
-        //скролим ниже
+        getLogger().info("Scroll down");
         jse.executeScript("window.scrollBy(0,1000)", "");
         Thread.sleep(2000);
 
-        //введем ответственных лиц
-        //отв за формир.обоснования.
-        WebElement elementButtonOtvLic = webDriver.findElement(By.xpath("//*[@id=\"accordion7\"]/div/div[1]/h2"));
-        elementButtonOtvLic.click();
+        getLogger().info("Input of responsible persons");//введем ответственных лиц
+        getLogger().info("Substantiation officer");//отв за формир.обоснования.
+        WebElement elementButtonSubstOfficers = webDriver.findElement(By.xpath("//*[@id=\"accordion7\"]/div/div[1]/h2"));
+        elementButtonSubstOfficers.click();
         Thread.sleep(2000);
-        WebElement buttonAddOtvZaFormObocn = webDriver.findElement(By.xpath("//*[@id=\"responsiblePersonGrid\"]/div[2]/table/tbody/tr[1]/td[4]/div/button"));
-        buttonAddOtvZaFormObocn.click();
+        WebElement buttonAddSubstOfficer = webDriver.findElement(By.xpath("//*[@id=\"responsiblePersonGrid\"]/div[2]/table/tbody/tr[1]/td[4]/div/button"));
+        buttonAddSubstOfficer.click();
         Thread.sleep(2000);
-        WebElement buttonOtvLico = webDriver.findElement(By.xpath("/html/body/div[30]/div/div/div/div[2]/form/fieldset/div[2]/div[2]/core-link/div/div[1]/div/button"));
-        buttonOtvLico.click();
+        WebElement buttonResponsPerson = webDriver.findElement(By.xpath("/html/body/div[30]/div/div/div/div[2]/form/fieldset/div[2]/div[2]/core-link/div/div[1]/div/button"));
+        buttonResponsPerson.click();
         Thread.sleep(2000);
-        WebElement otvLico = webDriver.findElement(By.xpath("//*[@id=\"responsiblePersonDialogGrid\"]/div[2]/table/tbody/tr/td[1]"));
-        otvLico.click();
+        WebElement responsiblePerson = webDriver.findElement(By.xpath("//*[@id=\"responsiblePersonDialogGrid\"]/div[2]/table/tbody/tr/td[1]"));
+        responsiblePerson.click();
         Thread.sleep(2000);
-        WebElement buttonVibor2 = webDriver.findElement(By.xpath("/html/body/div[32]/div/div/div/div[4]/button[2]"));
-        buttonVibor2.click();
+        WebElement buttonChoice2 = webDriver.findElement(By.xpath("/html/body/div[32]/div/div/div/div[4]/button[2]"));
+        buttonChoice2.click();
         Thread.sleep(2000);
-        WebElement saveVibor = webDriver.findElement(By.xpath("/html/body/div[30]/div/div/div/div[2]/form/fieldset/div[4]/div/button[1]"));
-        saveVibor.click();
+        WebElement saveChoice = webDriver.findElement(By.xpath("/html/body/div[30]/div/div/div/div[2]/form/fieldset/div[4]/div/button[1]"));
+        saveChoice.click();
         Thread.sleep(2000);
 
-        //скролим ниже
+        getLogger().info("Scroll down");
         jse.executeScript("window.scrollBy(0,400)", "");
         Thread.sleep(2000);
 
-        //ответств.за пров.закуп.
-        WebElement buttonAddOtvZaProvZak = webDriver.findElement(By.xpath("//*[@id=\"responsiblePersonGrid\"]/div[2]/table/tbody/tr[2]/td[4]/div/button"));
-        buttonAddOtvZaProvZak.click();
+        getLogger().info("Procurement officer");//ответств.за пров.закуп.
+        WebElement buttonAddProcurOfficer = webDriver.findElement(By.xpath("//*[@id=\"responsiblePersonGrid\"]/div[2]/table/tbody/tr[2]/td[4]/div/button"));
+        buttonAddProcurOfficer.click();
         Thread.sleep(2000);
-        WebElement buttonOtvLico2 = webDriver.findElement(By.xpath("/html/body/div[31]/div/div/div/div[2]/form/fieldset/div[2]/div[2]/core-link/div/div[1]/div/button"));
-        buttonOtvLico2.click();
+        WebElement buttonResponsPerson2 = webDriver.findElement(By.xpath("/html/body/div[31]/div/div/div/div[2]/form/fieldset/div[2]/div[2]/core-link/div/div[1]/div/button"));
+        buttonResponsPerson2.click();
         Thread.sleep(2000);
-        WebElement otvLico2 = webDriver.findElement(By.xpath("//*[@id=\"responsiblePersonDialogGrid\"]/div[2]/table/tbody/tr/td[1]"));
-        otvLico2.click();
+        WebElement responsiblePerson2 = webDriver.findElement(By.xpath("//*[@id=\"responsiblePersonDialogGrid\"]/div[2]/table/tbody/tr/td[1]"));
+        responsiblePerson2.click();
         Thread.sleep(2000);
-        WebElement buttonVibor3 = webDriver.findElement(By.xpath("/html/body/div[33]/div/div/div/div[4]/button[2]"));
-        buttonVibor3.click();
+        WebElement buttonChoice3 = webDriver.findElement(By.xpath("/html/body/div[33]/div/div/div/div[4]/button[2]"));
+        buttonChoice3.click();
         Thread.sleep(2000);
-        WebElement saveVibor2 = webDriver.findElement(By.xpath("/html/body/div[31]/div/div/div/div[2]/form/fieldset/div[4]/div/button[1]"));
-        saveVibor2.click();
-        Thread.sleep(2000);
-
-        //кнопка действие
-        WebElement buttonDo = webDriver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/div/div/div[1]/div[2]/div/button"));
-        buttonDo.click();
+        WebElement saveChoice2 = webDriver.findElement(By.xpath("/html/body/div[31]/div/div/div/div[2]/form/fieldset/div[4]/div/button[1]"));
+        saveChoice2.click();
         Thread.sleep(2000);
 
-        //подтверждение готовности
-        WebElement buttonPodtvGot = webDriver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/div/div/div[1]/div[2]/div/ul/li[2]/a"));
-        buttonPodtvGot.click();
+        getLogger().info("Looking for action button");
+        WebElement actionButton = webDriver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/div/div/div[1]/div[2]/div/button"));
+        actionButton.click();
+        Thread.sleep(2000);
 
-        WebElement finalPodtv = webDriver.findElement(By.xpath("/html/body/div[32]/div/div/div[3]/button[2]"));
-        finalPodtv.click();
+        getLogger().info("Readiness confirmation");//подтверждение готовности
+        WebElement buttonReadinessConfirm = webDriver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/div/div/div[1]/div[2]/div/ul/li[2]/a"));
+        buttonReadinessConfirm.click();
+
+        WebElement ReadinessConfirmation = webDriver.findElement(By.xpath("/html/body/div[32]/div/div/div[3]/button[2]"));
+        ReadinessConfirmation.click();
         Thread.sleep(3000);
 /*
         //Выбираем тип закупки (8)
