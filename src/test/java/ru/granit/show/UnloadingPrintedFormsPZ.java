@@ -1,7 +1,5 @@
 package ru.granit.show;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.granit.show.ui.pages.*;
@@ -11,6 +9,8 @@ public class UnloadingPrintedFormsPZ extends BaseTest {
     private final String login = "saratovsch";
     private final String password = "SHETKO1990";
 
+    private final String registryNumber = "000060-19";
+
     @Test
     public void openTest() throws InterruptedException {
 
@@ -19,8 +19,9 @@ public class UnloadingPrintedFormsPZ extends BaseTest {
         loginPage.login(login, password);
         Thread.sleep(2000);
 
-        CheckPurchaseNumberPage checkPurchasePlanNumber = new CheckPurchaseNumberPage(webDriver);
-        checkPurchasePlanNumber.purchasePlanNumber();
+        PlanPurchasePage purchasePlanNumberPage = new PlanPurchasePage(webDriver);
+        Assert.assertEquals(purchasePlanNumberPage.getRegistryPlanPurchaseNumber(), registryNumber,
+                "Реестровый номер плана закупок - верный");
 
         ActionButtonPage actionButton = new ActionButtonPage(webDriver);
         actionButton.clickActionButton();

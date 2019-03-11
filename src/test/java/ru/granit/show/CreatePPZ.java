@@ -12,6 +12,9 @@ public class CreatePPZ extends BaseTest {
     private final String login = "saratovsch";
     private final String password = "SHETKO1990";
 
+    private final String registryNumber = "000060-19";
+    private final String numIKZ = "3301";
+
     @Test
     public void openTest() throws InterruptedException {
 
@@ -20,28 +23,27 @@ public class CreatePPZ extends BaseTest {
         loginPage.login(login, password);
         Thread.sleep(2000);
 
-        CheckPurchaseNumberPage checkPurchasePlanNumber = new CheckPurchaseNumberPage(webDriver);
-        checkPurchasePlanNumber.purchasePlanNumber();
+        PlanPurchasePage planPurchasePage = new PlanPurchasePage(webDriver);
+        Assert.assertEquals(planPurchasePage.getRegistryPlanPurchaseNumber(), registryNumber,
+                "Реестровый номер плана закупок - верный");
 
-        CreateFormPurchaseObjectPage createObjectPurchase = new CreateFormPurchaseObjectPage(webDriver);
-        createObjectPurchase.createFormPurchaseObjectMethod();
+        planPurchasePage.clickOnCreatePurchaseObjectButton();
 
-        SaveButtonPage saveButton = new SaveButtonPage(webDriver);
-        saveButton.saveButtonMethod();
-        CloseAlertButtonPage closeAlertButton = new CloseAlertButtonPage(webDriver);
-        closeAlertButton.closeAlertButtonMethod();
+        planPurchasePage.savePlan();
+        planPurchasePage.closeAlert();
 
-        EnterSequenceNumberIkzPage enterSequenceNumber = new EnterSequenceNumberIkzPage(webDriver);
-        enterSequenceNumber.enterSequenceNumberIkzMethod();
+        planPurchasePage.setSerialNumberIKZ(numIKZ);
 
-        saveButton.saveButtonMethod();
-        closeAlertButton.closeAlertButtonMethod();
+        planPurchasePage.savePlan();
+        planPurchasePage.closeAlert();
+
+        /*===========to be continued===========*/
 
         EnterPlannedPlacementYearPage enterPlannedPlacementYear = new EnterPlannedPlacementYearPage(webDriver);
         enterPlannedPlacementYear.enterPlannedPlacementYearMethod();
 
-        saveButton.saveButtonMethod();
-        closeAlertButton.closeAlertButtonMethod();
+        planPurchasePage.savePlan();
+        planPurchasePage.closeAlert();
 
         getLogger().info("Scroll down");
         JavascriptExecutor jse = (JavascriptExecutor) webDriver;
@@ -50,14 +52,14 @@ public class CreatePPZ extends BaseTest {
         IntroduceJustificationObjectPage introduceJustificationObject = new IntroduceJustificationObjectPage(webDriver);
         introduceJustificationObject.introduceJustificationObjectMethod();
 
-        saveButton.saveButtonMethod();
-        closeAlertButton.closeAlertButtonMethod();
+        planPurchasePage.savePlan();
+        planPurchasePage.closeAlert();
 
         SpecifyTimeAndFrequencyDeliveryPage specifTimeAnFrequDeliv = new SpecifyTimeAndFrequencyDeliveryPage(webDriver);
         specifTimeAnFrequDeliv.specifyTimeAndFrequencyDeliveryMethod();
 
-        saveButton.saveButtonMethod();
-        closeAlertButton.closeAlertButtonMethod();
+        planPurchasePage.savePlan();
+        planPurchasePage.closeAlert();
 
         getLogger().info("Scroll up");
         jse.executeScript("window.scrollBy(0,-800)", "");
@@ -66,7 +68,7 @@ public class CreatePPZ extends BaseTest {
         IntroduceNameObjectPurchasePage introduceNameObjectPurchase = new IntroduceNameObjectPurchasePage(webDriver);
         introduceNameObjectPurchase.introduceNameObjectPurchaseMethod();
 
-        saveButton.saveButtonMethod();
+        planPurchasePage.savePlan();
         Thread.sleep(4000);
 
         AddSourceFundingPage addSourceFunding = new AddSourceFundingPage(webDriver);

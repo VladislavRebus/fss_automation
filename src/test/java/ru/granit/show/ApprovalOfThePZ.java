@@ -12,6 +12,8 @@ public class ApprovalOfThePZ extends BaseTest {
     private final String login = "saratovsch";
     private final String password = "SHETKO1990";
 
+    private final String registryNumber = "000060-19";
+
     @Test
     public void approvalOfThePZ() throws InterruptedException {
 
@@ -23,8 +25,9 @@ public class ApprovalOfThePZ extends BaseTest {
         //CloseMessageButtonPage closeMessage = new CloseMessageButtonPage(webDriver);
         //closeMessage.closeMessageButton();
 
-        CheckPurchaseNumberPage checkPurchasePlanNumber = new CheckPurchaseNumberPage(webDriver);
-        checkPurchasePlanNumber.purchasePlanNumber();
+        PlanPurchasePage purchasePlanNumberPage = new PlanPurchasePage(webDriver);
+        Assert.assertEquals(purchasePlanNumberPage.getRegistryPlanPurchaseNumber(), registryNumber,
+                "Реестровый номер плана закупок - верный");
 
         getLogger().info("Scroll down");
         JavascriptExecutor jse = (JavascriptExecutor) webDriver;
