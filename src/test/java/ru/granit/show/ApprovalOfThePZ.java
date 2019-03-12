@@ -38,7 +38,7 @@ public class ApprovalOfThePZ extends BaseTest {
         jse.executeScript("window.scrollBy(0,900)", "");
         Thread.sleep(2000);
 
-        planPurchasePage.setAuthorizedPerson(surnameKey,nameKey,positionKey);
+        planPurchasePage.setAuthorizedPerson(surnameKey, nameKey, positionKey);
 
         planPurchasePage.savePlan();
 
