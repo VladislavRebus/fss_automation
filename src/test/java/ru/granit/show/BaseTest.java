@@ -40,7 +40,7 @@ public class BaseTest {
         testLogger.startTest(method.getName());
     }
 
-  /*  @AfterMethod(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void afterMethod(Method method) {
         testLogger.endTest(method.getName());
     }
@@ -50,7 +50,7 @@ public class BaseTest {
         testLogger.getLogger().debug("Close browser");
         if (webDriver != null) webDriver.quit();
         testLogger.endSuite(suiteName);
-    } */
+    }
 
     protected Logger getLogger(){
         return testLogger.getLogger();

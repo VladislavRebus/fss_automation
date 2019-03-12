@@ -13,6 +13,10 @@ public class ApprovalOfThePZ extends BaseTest {
     private final String password = "SHETKO1990";
 
     private final String registryNumber = "000060-19";
+    private final String surnameKey = "Максимов";
+    private final String nameKey = "Максим";
+    private final String positionKey = "Ведущий специалист";
+    private final String sumKey = "75000000";
 
     @Test
     public void approvalOfThePZ() throws InterruptedException {
@@ -22,11 +26,11 @@ public class ApprovalOfThePZ extends BaseTest {
         loginPage.login(login, password);
         Thread.sleep(6000);
 
-        //CloseMessageButtonPage closeMessage = new CloseMessageButtonPage(webDriver);
-        //closeMessage.closeMessageButton();
+        PlanPurchasePage planPurchasePage = new PlanPurchasePage(webDriver);
 
-        PlanPurchasePage purchasePlanNumberPage = new PlanPurchasePage(webDriver);
-        Assert.assertEquals(purchasePlanNumberPage.getRegistryPlanPurchaseNumber(), registryNumber,
+        planPurchasePage.closeMessage();
+
+        Assert.assertEquals(planPurchasePage.getRegistryPlanPurchaseNumber(), registryNumber,
                 "Реестровый номер плана закупок - верный");
 
         getLogger().info("Scroll down");
@@ -34,18 +38,15 @@ public class ApprovalOfThePZ extends BaseTest {
         jse.executeScript("window.scrollBy(0,900)", "");
         Thread.sleep(2000);
 
-        AuthorizedPersonPage authorizedPerson = new AuthorizedPersonPage(webDriver);
-        authorizedPerson.authorizedPersonMethod();
+        planPurchasePage.setAuthorizedPerson(surnameKey,nameKey,positionKey);
 
-        SaveButtonPage saveButton = new SaveButtonPage(webDriver);
-        saveButton.saveButtonMethod();
+        planPurchasePage.savePlan();
 
         getLogger().info("Scroll up");
         jse.executeScript("window.scrollBy(0,-800)", "");
         Thread.sleep(2000);
 
-        DetailKbkPage detalizationKbk = new DetailKbkPage(webDriver);
-        detalizationKbk.detailKbkMethod();
+        planPurchasePage.setDetailKbk(sumKey);
 
         getLogger().info("Save change"); //этот кусок незнаю как оформить отдельно,или можно так же в SaveButton как-то прикрепить
         WebElement saveChange = webDriver.findElement(By.xpath("//*[@id=\"accordion7\"]/div[1]/button[1]"));
@@ -55,10 +56,8 @@ public class ApprovalOfThePZ extends BaseTest {
         saveChangeConfirmation.click();
         Thread.sleep(2000);
 
-        ActionButtonPage actionButton = new ActionButtonPage(webDriver);
-        actionButton.clickActionButton();
+        planPurchasePage.clickButtonAction();
 
-        SendingForApprovalPage sendingForApproval = new SendingForApprovalPage(webDriver);
-        sendingForApproval.sendingForApprovalMethod();
+        planPurchasePage.clickSendingForApproval();
     }
 }

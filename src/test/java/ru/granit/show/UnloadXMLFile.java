@@ -19,16 +19,14 @@ public class UnloadXMLFile extends BaseTest {
         loginPage.login(login, password);
         Thread.sleep(2000);
 
-        PlanPurchasePage purchasePlanNumberPage = new PlanPurchasePage(webDriver);
-        Assert.assertEquals(purchasePlanNumberPage.getRegistryPlanPurchaseNumber(), registryNumber,
+        PlanPurchasePage planPurchasePage = new PlanPurchasePage(webDriver);
+        Assert.assertEquals(planPurchasePage.getRegistryPlanPurchaseNumber(), registryNumber,
                 "Реестровый номер плана закупок - верный");
 
-        ActionButtonPage actionButton = new ActionButtonPage(webDriver);
-        actionButton.clickActionButton();
+        planPurchasePage.clickButtonAction();
 
-        getLogger().info("Choose unload XML in EIS");
-        FormLoadingPage unloadXMLinEICPage = new FormLoadingPage(webDriver);
-        unloadXMLinEICPage.openFormByNumber(16);
+        getLogger().info("Выгрузить XML в ЕИС");
+        planPurchasePage.clickLoadingForm(16);
         Thread.sleep(2000);
     }
 }

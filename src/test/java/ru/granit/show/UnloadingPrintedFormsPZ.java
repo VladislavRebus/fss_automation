@@ -19,41 +19,34 @@ public class UnloadingPrintedFormsPZ extends BaseTest {
         loginPage.login(login, password);
         Thread.sleep(2000);
 
-        PlanPurchasePage purchasePlanNumberPage = new PlanPurchasePage(webDriver);
-        Assert.assertEquals(purchasePlanNumberPage.getRegistryPlanPurchaseNumber(), registryNumber,
+        PlanPurchasePage planPurchasePage = new PlanPurchasePage(webDriver);
+        Assert.assertEquals(planPurchasePage.getRegistryPlanPurchaseNumber(), registryNumber,
                 "Реестровый номер плана закупок - верный");
 
-        ActionButtonPage actionButton = new ActionButtonPage(webDriver);
-        actionButton.clickActionButton();
+        planPurchasePage.clickButtonAction();
 
-        getLogger().info("Download printed form 552PP.Pdf");
-        FormLoadingPage form552ppPdfPage = new FormLoadingPage(webDriver);
-        form552ppPdfPage.openFormByNumber(5);
+        getLogger().info("Загрузить печатную форму 552ПП.Pdf");
+        planPurchasePage.clickLoadingForm(5);
 
-        actionButton.clickActionButton();
-        getLogger().info("Download printed form 552PP.Excel");
-        FormLoadingPage form552ppExcelPage = new FormLoadingPage(webDriver);
-        form552ppExcelPage.openFormByNumber(6);
+        planPurchasePage.clickButtonAction();
+        getLogger().info("Загрузить печатную форму 552ПП.Excel");
+        planPurchasePage.clickLoadingForm(6);
 
-        actionButton.clickActionButton();
-        getLogger().info("Download printed form 552PP (KOSGU) .Pdf");
-        FormLoadingPage form552ppKOSGUPdfPage = new FormLoadingPage(webDriver);
-        form552ppKOSGUPdfPage.openFormByNumber(7);
+        planPurchasePage.clickButtonAction();
+        getLogger().info("Загрузить печатную форму 552ПП(КОСГУ).Pdf");
+        planPurchasePage.clickLoadingForm(7);
 
-        actionButton.clickActionButton();
-        getLogger().info("Download printed form 552PP (KOSGU) .Excel");
-        FormLoadingPage form552ppKOSGUExcelPage = new FormLoadingPage(webDriver);
-        form552ppKOSGUExcelPage.openFormByNumber(8);
+        planPurchasePage.clickButtonAction();
+        getLogger().info("Загрузить печатную форму 552ПП(КОСГУ).Excel");
+        planPurchasePage.clickLoadingForm(8);
 
-        actionButton.clickActionButton();
-        getLogger().info("Download justification for 555 PP Pdf");
-        FormLoadingPage justification555ppPdfPage = new FormLoadingPage(webDriver);
-        justification555ppPdfPage.openFormByNumber(9);
+        planPurchasePage.clickButtonAction();
+        getLogger().info("Сформировать обоснование по 555ПП.Pdf");
+        planPurchasePage.clickLoadingForm(9);
 
-        actionButton.clickActionButton();
-        getLogger().info("Download justification for 555 PP Excel");
-        FormLoadingPage justification555ppExcelPage = new FormLoadingPage(webDriver);
-        justification555ppExcelPage.openFormByNumber(10);
+        planPurchasePage.clickButtonAction();
+        getLogger().info("Сформировать обоснование по 555ПП.Excel");
+        planPurchasePage.clickLoadingForm(10);
         Thread.sleep(3000);
     }
 }

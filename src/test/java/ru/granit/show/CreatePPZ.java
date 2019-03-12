@@ -14,6 +14,11 @@ public class CreatePPZ extends BaseTest {
 
     private final String registryNumber = "000060-19";
     private final String numIKZ = "3301";
+    private final String year = "2019";
+    private final String justification = "Прямая необходимость";
+    private final String time2 = "Эти буквы должны быть здесь";
+    private final String nameObjectPurch = "Партия кожаных дипломатов MAKEY";
+    private final String sum = "75000000";
 
     @Test
     public void openTest() throws InterruptedException {
@@ -39,8 +44,7 @@ public class CreatePPZ extends BaseTest {
 
         /*===========to be continued===========*/
 
-        EnterPlannedPlacementYearPage enterPlannedPlacementYear = new EnterPlannedPlacementYearPage(webDriver);
-        enterPlannedPlacementYear.enterPlannedPlacementYearMethod();
+        planPurchasePage.setPlannedPlacementYear(year);
 
         planPurchasePage.savePlan();
         planPurchasePage.closeAlert();
@@ -49,14 +53,12 @@ public class CreatePPZ extends BaseTest {
         JavascriptExecutor jse = (JavascriptExecutor) webDriver;
         jse.executeScript("window.scrollBy(0,900)", "");
 
-        IntroduceJustificationObjectPage introduceJustificationObject = new IntroduceJustificationObjectPage(webDriver);
-        introduceJustificationObject.introduceJustificationObjectMethod();
+        planPurchasePage.setIntroduceJustificationObject(justification);
 
         planPurchasePage.savePlan();
         planPurchasePage.closeAlert();
 
-        SpecifyTimeAndFrequencyDeliveryPage specifTimeAnFrequDeliv = new SpecifyTimeAndFrequencyDeliveryPage(webDriver);
-        specifTimeAnFrequDeliv.specifyTimeAndFrequencyDeliveryMethod();
+        planPurchasePage.setSpecifyTimeAndFrequencyDelivery(time2);
 
         planPurchasePage.savePlan();
         planPurchasePage.closeAlert();
@@ -65,47 +67,39 @@ public class CreatePPZ extends BaseTest {
         jse.executeScript("window.scrollBy(0,-800)", "");
         Thread.sleep(2000);
 
-        IntroduceNameObjectPurchasePage introduceNameObjectPurchase = new IntroduceNameObjectPurchasePage(webDriver);
-        introduceNameObjectPurchase.introduceNameObjectPurchaseMethod();
+        planPurchasePage.setIntroduceNameObjectPurchase(nameObjectPurch);
 
         planPurchasePage.savePlan();
         Thread.sleep(4000);
 
-        AddSourceFundingPage addSourceFunding = new AddSourceFundingPage(webDriver);
-        addSourceFunding.AddSourceFundingMethod();
+        planPurchasePage.addSourceFunding(sum);
 
         getLogger().info("Save button (9)");//Пробуем сохранить (9) - здесь не стандартный локатор
         WebElement buttonSave = webDriver.findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[3]/button[2]"));
         buttonSave.click();
         Thread.sleep(2000);
 
-        CreatePurchaseObjectPage createPurchaseObject = new CreatePurchaseObjectPage(webDriver);
-        createPurchaseObject.createPurchaseObjectMethod();
+        planPurchasePage.clickOnCreatePurchaseObjectButton2();
 
         getLogger().info("Save button (9)");//Пробуем сохранить (9) - здесь не стандартный локатор2
         WebElement buttonSave2 = webDriver.findElement(By.xpath("/html/body/div[27]/div/div/div[3]/button[2]"));
         buttonSave2.click();
         Thread.sleep(2000);
 
-
         getLogger().info("Scroll down");
         jse.executeScript("window.scrollBy(0,1000)", "");
         Thread.sleep(2000);
 
-        InputSubstantiationOfficerPage inputSubstantiationOfficer = new InputSubstantiationOfficerPage(webDriver);
-        inputSubstantiationOfficer.inputSubstantiationOfficerMethod();
+        planPurchasePage.setSubstantiationOfficer();
 
         getLogger().info("Scroll down");
         jse.executeScript("window.scrollBy(0,400)", "");
         Thread.sleep(2000);
 
-        InputProcurementOfficerPage inputProcurementOfficer = new InputProcurementOfficerPage(webDriver);
-        inputProcurementOfficer.inputProcurementOfficerMethod();
+        planPurchasePage.setProcurementOfficer();
 
-        ActionButtonPage actionButton = new ActionButtonPage(webDriver);
-        actionButton.clickActionButton();
+        planPurchasePage.clickButtonAction();
 
-        ReadinessConfirmationPage readinessConfirmation = new ReadinessConfirmationPage(webDriver);
-        readinessConfirmation.readinessConfirmationMethod();
+        planPurchasePage.clickButtonReadinessConfirmation();
     }
 }
