@@ -247,7 +247,7 @@ public class PlanPurchasePage extends BasePage {
         WebElement changeKBK = getDriver().findElement(By.xpath("//*[@id=\"accordion7\"]/div[1]/button[1]"));
         changeKBK.click();
         Thread.sleep(2000);
-        WebElement field2019 = getDriver().findElement(LOCATOR_TXT_SUMKEY_FIELD_DETAIL_KBK); 
+        WebElement field2019 = getDriver().findElement(LOCATOR_TXT_SUMKEY_FIELD_DETAIL_KBK);
         field2019.sendKeys(sumKey);
         Thread.sleep(2000);
     }
