@@ -42,10 +42,10 @@ public class PlanPurchasePage extends BasePage {
         return registryPlanPurchaseNumberTxt.getAttribute("value");
     }
 
-    public void clickOnCreatePurchaseObjectButton() throws InterruptedException {
+    public void clickButtonOnCreatePurchaseObject() throws InterruptedException {
         getLogger().getLogger().info("Нажать на 'Создать объект закупки'");
-        WebElement createPurchaseObjectButton = getDriver().findElement(By.xpath(".//button[@ng-click='createSpecification()']"));
-        createPurchaseObjectButton.click();
+        WebElement createButtonPurchaseObject = getDriver().findElement(By.xpath(".//button[@ng-click='createSpecification()']"));
+        createButtonPurchaseObject.click();
         Thread.sleep(2000);
     }
 
@@ -97,8 +97,8 @@ public class PlanPurchasePage extends BasePage {
 
     public void setIntroduceNameObjectPurchase(String nameObjectPurch) throws InterruptedException {
         getLogger().getLogger().info("Ввести наименование объекта или объектов закупки" + nameObjectPurch);
-        WebElement nameObjectPurchElement = getDriver().findElement(LOCATOR_TXT_INTRODUCE_NAME_OBJECT_PURCHASE);
-        nameObjectPurchElement.sendKeys(nameObjectPurch);
+        WebElement nameObjectPurchaseElement = getDriver().findElement(LOCATOR_TXT_INTRODUCE_NAME_OBJECT_PURCHASE);
+        nameObjectPurchaseElement.sendKeys(nameObjectPurch);
         Thread.sleep(2000);
     }
 
@@ -107,20 +107,20 @@ public class PlanPurchasePage extends BasePage {
         WebElement sourceFundButton = getDriver().findElement(By.xpath("//*[@id=\"accordion2\"]/div/div[2]/button"));
         sourceFundButton.click();
         Thread.sleep(2000);
-        WebElement buttonYear = getDriver().findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[2]/form/div[1]/div[1]/div/div/core-combo/div/div/span/span/span"));
-        buttonYear.click();
+        WebElement yearButton = getDriver().findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[2]/form/div[1]/div[1]/div/div/core-combo/div/div/span/span/span"));
+        yearButton.click();
         Thread.sleep(2000);
         WebElement year2019Button = getDriver().findElement(By.xpath("/html/body/div[22]/div/ul/li[1]"));
         year2019Button.click();
         Thread.sleep(2000);
-        WebElement buttonKbk = getDriver().findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[2]/form/div[1]/div[2]/div[3]/core-combo/div/div/span/span/span"));
-        buttonKbk.click();
+        WebElement kbkButton = getDriver().findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[2]/form/div[1]/div[2]/div[3]/core-combo/div/div/span/span/span"));
+        kbkButton.click();
         Thread.sleep(2000);
         WebElement kbk149346Button = getDriver().findElement(By.xpath("/html/body/div[24]/div/ul/li[1]"));
         kbk149346Button.click();
         Thread.sleep(2000);
-        WebElement buttonPersonalAccount = getDriver().findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[2]/form/div[3]/div[2]/div/core-combo/div/div/span/span/span")); //лицевой счет
-        buttonPersonalAccount.click();
+        WebElement personalAccountButton = getDriver().findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[2]/form/div[3]/div[2]/div/core-combo/div/div/span/span/span")); //лицевой счет
+        personalAccountButton.click();
         Thread.sleep(2000);
         WebElement account05604 = getDriver().findElement(By.xpath("/html/body/div[25]/div/ul/li[1]")); //номер счета
         account05604.click();
@@ -132,29 +132,29 @@ public class PlanPurchasePage extends BasePage {
 
     public void clickOnCreatePurchaseObjectButton2() throws InterruptedException {
         getLogger().getLogger().info("Нажать на 'Создать объект закупки' повторно");
-        WebElement buttonPurchaseObjCreate = getDriver().findElement(By.xpath("//*[@id=\"accordion8\"]/div/div[2]/button"));
-        buttonPurchaseObjCreate.click();
+        WebElement purchaseObjectCreateButton = getDriver().findElement(By.xpath("//*[@id=\"accordion8\"]/div/div[2]/button"));
+        purchaseObjectCreateButton.click();
         Thread.sleep(2000);
-        WebElement buttonPotrIzReestra = getDriver().findElement(By.xpath("/html/body/div[27]/div/div/div[2]/div[1]/div[2]/core-link/div/div[1]/div/button"));
-        buttonPotrIzReestra.click();
+        WebElement potrIzReestraButton = getDriver().findElement(By.xpath("/html/body/div[27]/div/div/div[2]/div[1]/div[2]/core-link/div/div[1]/div/button"));
+        potrIzReestraButton.click();
         Thread.sleep(2000);
         WebElement objFromRegistry701 = getDriver().findElement(By.xpath("//*[@id=\"tsrNeedsGrid\"]/div[2]/table/tbody/tr[1]/td[2]"));
         objFromRegistry701.click();
         Thread.sleep(2000);
-        WebElement buttonChoice = getDriver().findElement(By.xpath("/html/body/div[29]/div/div/div/div[4]/button[2]"));//кнопка выбор
-        buttonChoice.click();
+        WebElement choiceButton = getDriver().findElement(By.xpath("/html/body/div[29]/div/div/div/div[4]/button[2]"));//кнопка выбор
+        choiceButton.click();
         Thread.sleep(2000);
-        WebElement typeOrder = getDriver().findElement(By.xpath("/html/body/div[27]/div/div/div[2]/div[3]/div[2]/core-combo/div/div/span/span/span"));//тип заказа
-        typeOrder.click();
+        WebElement typeOrderButton = getDriver().findElement(By.xpath("/html/body/div[27]/div/div/div[2]/div[3]/div[2]/core-combo/div/div/span/span/span"));//тип заказа
+        typeOrderButton.click();
         Thread.sleep(2000);
-        WebElement product = getDriver().findElement(By.xpath("/html/body/div[28]/div/ul/li[1]")); //товар
-        product.click();
+        WebElement productButton = getDriver().findElement(By.xpath("/html/body/div[28]/div/ul/li[1]")); //товар
+        productButton.click();
     }
 
     public void setSubstantiationOfficer() throws InterruptedException {
         getLogger().getLogger().info("Ввести ответственных лиц. Ответственный за формирование обоснования");
-        WebElement elementButtonSubstOfficers = getDriver().findElement(By.xpath("//*[@id=\"accordion7\"]/div/div[1]/h2"));
-        elementButtonSubstOfficers.click();
+        WebElement elementSubstOfficersButton = getDriver().findElement(By.xpath("//*[@id=\"accordion7\"]/div/div[1]/h2"));
+        elementSubstOfficersButton.click();
         Thread.sleep(2000);
         WebElement buttonAddSubstOfficer = getDriver().findElement(By.xpath("//*[@id=\"responsiblePersonGrid\"]/div[2]/table/tbody/tr[1]/td[4]/div/button"));
         buttonAddSubstOfficer.click();
@@ -175,8 +175,8 @@ public class PlanPurchasePage extends BasePage {
 
     public void setProcurementOfficer() throws InterruptedException {
         getLogger().getLogger().info("Ввести ответственных лиц. Ответственный за проведение закупки");
-        WebElement buttonAddProcurOfficer = getDriver().findElement(By.xpath("//*[@id=\"responsiblePersonGrid\"]/div[2]/table/tbody/tr[2]/td[4]/div/button"));
-        buttonAddProcurOfficer.click();
+        WebElement buttonAddProcurementOfficer = getDriver().findElement(By.xpath("//*[@id=\"responsiblePersonGrid\"]/div[2]/table/tbody/tr[2]/td[4]/div/button"));
+        buttonAddProcurementOfficer.click();
         Thread.sleep(2000);
         WebElement buttonResponsPerson2 = getDriver().findElement(By.xpath("/html/body/div[31]/div/div/div/div[2]/form/fieldset/div[2]/div[2]/core-link/div/div[1]/div/button"));
         buttonResponsPerson2.click();

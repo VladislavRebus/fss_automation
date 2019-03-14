@@ -32,7 +32,7 @@ public class CreatePPZ extends BaseTest {
         Assert.assertEquals(planPurchasePage.getRegistryPlanPurchaseNumber(), registryNumber,
                 "Реестровый номер плана закупок - верный");
 
-        planPurchasePage.clickOnCreatePurchaseObjectButton();
+        planPurchasePage.clickButtonOnCreatePurchaseObject();
 
         planPurchasePage.savePlan();
         planPurchasePage.closeAlert();
