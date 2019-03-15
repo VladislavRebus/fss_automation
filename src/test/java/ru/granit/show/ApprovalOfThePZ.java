@@ -48,13 +48,8 @@ public class ApprovalOfThePZ extends BaseTest {
 
         planPurchasePage.setDetailKbk(sumKey);
 
-        getLogger().info("Save change"); //этот кусок незнаю как оформить отдельно,или можно так же в SaveButton как-то прикрепить
-        WebElement saveChange = webDriver.findElement(By.xpath("//*[@id=\"accordion7\"]/div[1]/button[1]"));
-        saveChange.click();
-        Thread.sleep(2000);
-        WebElement saveChangeConfirmation = webDriver.findElement(By.xpath("/html/body/div[13]/div/div/div[3]/button[2]"));
-        saveChangeConfirmation.click();
-        Thread.sleep(2000);
+        planPurchasePage.saveChangeButton();
+        planPurchasePage.saveChangeConfirmationButton();
 
         planPurchasePage.clickButtonAction();
 

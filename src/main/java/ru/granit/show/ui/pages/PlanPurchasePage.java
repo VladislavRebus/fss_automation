@@ -267,12 +267,40 @@ public class PlanPurchasePage extends BasePage {
 
     public void clickTypePurchase() throws InterruptedException {
 
-        getLogger().getLogger().info("Выбираем тип закупки"); //(8)
+        getLogger().getLogger().info("Выбрать тип закупки"); //(8)
         WebElement tipZak = getDriver().findElement(By.xpath("//*[@id=\"mainDataPanel\"]/div/form/fieldset/div[8]/div/div/core-combo/div/div/span/span/span"));
         Thread.sleep(2000);
         tipZak.click();
         WebElement vybor2 = getDriver().findElement(By.xpath("/html/body/div[30]/div/ul/li[5]"));
         vybor2.click();
         Thread.sleep(1000);
+    }
+
+    public void saveChangeButton() throws InterruptedException {
+        getLogger().getLogger().info("Сохранить изменения");
+        WebElement saveChange = getDriver().findElement(By.xpath("//*[@id=\"accordion7\"]/div[1]/button[1]"));
+        saveChange.click();
+        Thread.sleep(2000);
+    }
+
+    public void saveChangeConfirmationButton() throws InterruptedException {
+        getLogger().getLogger().info("Подтвердить сохранение изменений");
+        WebElement saveChangeConfirmation = getDriver().findElement(By.xpath("/html/body/div[13]/div/div/div[3]/button[2]"));
+        saveChangeConfirmation.click();
+        Thread.sleep(2000);
+    }
+
+    public void saveSourceOfFundingButton() throws InterruptedException {
+        getLogger().getLogger().info("Сохранить источник финансирования");
+        WebElement buttonSave = getDriver().findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[3]/button[2]"));
+        buttonSave.click();
+        Thread.sleep(2000);
+    }
+
+    public void savePlannedPurchaseObjectButton() throws InterruptedException {
+        getLogger().getLogger().info("Сохранить планируемый объект закупки");
+        WebElement buttonSave = getDriver().findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[3]/button[2]"));
+        buttonSave.click();
+        Thread.sleep(2000);
     }
 }

@@ -42,8 +42,6 @@ public class CreatePPZ extends BaseTest {
         planPurchasePage.savePlan();
         planPurchasePage.closeAlert();
 
-        /*===========to be continued===========*/
-
         planPurchasePage.setPlannedPlacementYear(year);
 
         planPurchasePage.savePlan();
@@ -73,18 +71,10 @@ public class CreatePPZ extends BaseTest {
         Thread.sleep(4000);
 
         planPurchasePage.addSourceFunding(sum);
-
-        getLogger().info("Save button (9)");//Пробуем сохранить (9) - здесь не стандартный локатор
-        WebElement buttonSave = webDriver.findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[3]/button[2]"));
-        buttonSave.click();
-        Thread.sleep(2000);
+        planPurchasePage.saveSourceOfFundingButton();
 
         planPurchasePage.clickOnCreatePurchaseObjectButton2();
-
-        getLogger().info("Save button (9)");//Пробуем сохранить (9) - здесь не стандартный локатор2
-        WebElement buttonSave2 = webDriver.findElement(By.xpath("/html/body/div[27]/div/div/div[3]/button[2]"));
-        buttonSave2.click();
-        Thread.sleep(2000);
+        planPurchasePage.savePlannedPurchaseObjectButton();
 
         getLogger().info("Scroll down");
         jse.executeScript("window.scrollBy(0,1000)", "");
