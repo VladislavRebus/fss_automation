@@ -14,7 +14,6 @@ public class CreatePPZ extends BaseTest {
 
     private final String registryNumber = "000060-19";
     private final String numIKZ = "3301";
-    private final String year = "2019";
     private final String justification = "Прямая необходимость";
     private final String time2 = "Эти буквы должны быть здесь";
     private final String nameObjectPurch = "Партия кожаных дипломатов MAKEY";
@@ -42,7 +41,7 @@ public class CreatePPZ extends BaseTest {
         planPurchasePage.savePlan();
         planPurchasePage.closeAlert();
 
-        planPurchasePage.setPlannedPlacementYear(year);
+        planPurchasePage.setPlannedPlacementYear();
 
         planPurchasePage.savePlan();
         planPurchasePage.closeAlert();
