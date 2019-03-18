@@ -29,7 +29,7 @@ public class BaseTest {
         testLogger = TestLogger.get();
         initializationDriver();
         webDriver.manage().window().maximize();
-        suiteName = context.getSuite().getXmlSuite().getName();
+        suiteName = context.getSuite().getXmlSuite().getName( );
         testLogger.startSuite(suiteName);
         testLogger.getLogger().info("Navigate to " + DEFAULT_URL);
         webDriver.get(DEFAULT_URL);
