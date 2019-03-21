@@ -90,5 +90,6 @@ public class CreatePPZ extends BaseTest {
         planPurchasePage.clickButtonAction();
 
         planPurchasePage.clickButtonReadinessConfirmation();
+       // planPurchasePage.closeMessage();
     }
 }

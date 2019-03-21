@@ -10,19 +10,15 @@ public class PlanPurchasePage extends BasePage {
             "./label[text()='Реестровый номер плана закупок:']]/input");
     private static final By LOCATOR_TXT_SERIAL_NUMBER_FOR_IKZ = By.xpath("//div[contains(@class,'col') and " +
             "./label[text()='Порядковый номер для ИКЗ:']]/input");
-    private static final By LOCATOR_TXT_YEAR_PLANNED_PLACEMENT = By.xpath(".//span[contains(@class,'dropdown')]//span[@class='k-select']");
-    private static final By LOCATOR_TXT_INTRODUCE_JUSTIFICATION = By.xpath("//*[@id=\"to-purchase\"]");
+    private static final By LOCATOR_TXT_YEAR_PLANNED_PLACEMENT = By.xpath(".//div[contains(@class, 'hold-select') and .//*[@combo-value=\"planningYearBind\"]]//*[@role='button']");
+    private static final By LOCATOR_TXT_INTRODUCE_JUSTIFICATION = By.xpath("//*[@id='to-purchase']");
     private static final By LOCATOR_TXT_SPECIFY_TIME_AND_FREQUENCY_DELIVERY = By.xpath("//textarea[@ng-model='entity.purchasePeriodDescription']");
     private static final By LOCATOR_TXT_INTRODUCE_NAME_OBJECT_PURCHASE = By.xpath("//input[@ng-model='entity.name']");
     private static final By LOCATOR_TXT_SUM_IN_SOURCE_FUNDING = By.xpath("//input[@style='display: inline-block;']");
-    private static final By LOCATOR_TXT_AUTHORIZED_PERSON_SURNAME = By.xpath("//*[@id=\"confirmPersonPanel\"]/div/div/" +
-            "div[1]/div/input");
-    private static final By LOCATOR_TXT_AUTHORIZED_PERSON_NAME = By.xpath("//*[@id=\"confirmPersonPanel\"]/div/div/" +
-            "div[2]/div/input");
-    private static final By LOCATOR_TXT_AUTHORIZED_PERSON_POSITION = By.xpath("//*[@id=\"confirmPersonPanel\"]/div/div/" +
-            "div[4]/div/input");
-    private static final By LOCATOR_TXT_SUMKEY_FIELD_DETAIL_KBK = By.xpath("//*[@id=\"kbkDetailsGrid\"]/div[2]/table/" +
-            "tbody/tr/td[2]/span/span/input[1]");
+    private static final By LOCATOR_TXT_AUTHORIZED_PERSON_SURNAME = By.xpath("//input[@ng-model='entity.confirmLastName']");
+    private static final By LOCATOR_TXT_AUTHORIZED_PERSON_NAME = By.xpath("//input[@ng-model='entity.confirmFirstName']");
+    private static final By LOCATOR_TXT_AUTHORIZED_PERSON_POSITION = By.xpath("//input[@ng-model='entity.confirmPosition']");
+    private static final By LOCATOR_TXT_SUMKEY_FIELD_DETAIL_KBK = By.xpath("//*[2]/span[1]/span[1]/input[@type='text' and @tabindex='0']");
 
     public PlanPurchasePage(WebDriver driver) {
         super(driver, "Страница плана закупок");
@@ -40,7 +36,7 @@ public class PlanPurchasePage extends BasePage {
 
     public void clickButtonOnCreatePurchaseObject() throws InterruptedException {
         getLogger().getLogger().info("Нажать на 'Создать объект закупки'");
-        WebElement createButtonPurchaseObject = getDriver().findElement(By.xpath(".//button[@ng-click='createSpecification()']"));
+        WebElement createButtonPurchaseObject = getDriver().findElement(By.xpath("//button[text()='Создать объект закупки']"));
         createButtonPurchaseObject.click();
         Thread.sleep(2000);
     }
@@ -70,7 +66,7 @@ public class PlanPurchasePage extends BasePage {
         WebElement yearPlacement = getDriver().findElement(LOCATOR_TXT_YEAR_PLANNED_PLACEMENT);
         yearPlacement.click();
         Thread.sleep(1000);
-        WebElement selection = getDriver().findElement(By.xpath("/html/body/div[12]/div/ul/li[1]")); //--этот не придумал как переписать красивее|||||||||||||||||||||
+        WebElement selection = getDriver().findElement(By.xpath("//ul[@role='listbox' and @aria-hidden='false']/li[text()='2019']"));
         selection.click();
     }
 
@@ -103,22 +99,23 @@ public class PlanPurchasePage extends BasePage {
         WebElement sourceFundButton = getDriver().findElement(By.xpath("//button[text()='Добавить источник финансирования']"));
         sourceFundButton.click();
         Thread.sleep(2000);
-        WebElement yearButton = getDriver().findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[2]/form/div[1]/div[1]/div/div/core-combo/div/div/span/span/span"));
+        WebElement yearButton = getDriver().findElement(By.xpath(".//div[@class='modal-content']//*[@combo-value='kbkYear']//*[@role='button']"));
         yearButton.click();
         Thread.sleep(2000);
-        WebElement year2019Button = getDriver().findElement(By.xpath("/html/body/div[22]/div/ul/li[1]"));
+        WebElement year2019Button = getDriver().findElement(By.xpath("//ul[@role='listbox' and @aria-hidden='false']/li[text()='2019']")); //html/body/div[22]/div/ul/li[1]
         year2019Button.click();
         Thread.sleep(2000);
-        WebElement kbkButton = getDriver().findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[2]/form/div[1]/div[2]/div[3]/core-combo/div/div/span/span/span"));
+        WebElement kbkButton = getDriver().findElement(By.xpath(".//div[@class='modal-content']" +
+                "//*[@combo-display-field='internalCode' and @combo-value='kbkFixedValuesBind']//*[@role='button']"));
         kbkButton.click();
         Thread.sleep(2000);
-        WebElement kbk149346Button = getDriver().findElement(By.xpath("/html/body/div[24]/div/ul/li[1]"));
+        WebElement kbk149346Button = getDriver().findElement(By.xpath("//ul[@role='listbox' and @aria-hidden='false']/li[text()='393-0113-0370290059/1-149-346']")); //html/body/div[24]/div/ul/li[1]
         kbk149346Button.click();
         Thread.sleep(2000);
-        WebElement personalAccountButton = getDriver().findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[2]/form/div[3]/div[2]/div/core-combo/div/div/span/span/span")); //лицевой счет
+        WebElement personalAccountButton = getDriver().findElement(By.xpath(".//div[@class='modal-content']//*[contains(@combo-value, 'entityForCreation')]//*[@role='button']")); //лицевой счет
         personalAccountButton.click();
         Thread.sleep(2000);
-        WebElement account05604 = getDriver().findElement(By.xpath("/html/body/div[25]/div/ul/li[1]")); //номер счета
+        WebElement account05604 = getDriver().findElement(By.xpath("//ul[@role='listbox' and @aria-hidden='false']/li[text()='05604С00020']")); //номер счета
         account05604.click();
         Thread.sleep(2000);
         WebElement sumElement = getDriver().findElement(LOCATOR_TXT_SUM_IN_SOURCE_FUNDING);
@@ -128,84 +125,86 @@ public class PlanPurchasePage extends BasePage {
 
     public void clickOnCreatePurchaseObjectButton2() throws InterruptedException {
         getLogger().getLogger().info("Нажать на 'Создать объект закупки' повторно");
-        WebElement purchaseObjectCreateButton = getDriver().findElement(By.xpath("//*[@id=\"accordion8\"]/div/div[2]/button"));
+        WebElement purchaseObjectCreateButton = getDriver().findElement(By.xpath("//button[text()='Создать объект закупки']"));
         purchaseObjectCreateButton.click();
         Thread.sleep(2000);
-        WebElement potrIzReestraButton = getDriver().findElement(By.xpath("/html/body/div[27]/div/div/div[2]/div[1]/div[2]/core-link/div/div[1]/div/button"));
+        WebElement potrIzReestraButton = getDriver().findElement(By.xpath("//div[1]/div[contains(@class, 'indent')]//button[contains(@class, 'ng-scope')]"));
         potrIzReestraButton.click();
         Thread.sleep(2000);
-        WebElement objFromRegistry701 = getDriver().findElement(By.xpath("//*[@id=\"tsrNeedsGrid\"]/div[2]/table/tbody/tr[1]/td[2]"));
+        WebElement objFromRegistry701 = getDriver().findElement(By.xpath("//*[@id='tsrNeedsGrid']//tr[@class='ng-scope']//td[@role='gridcell']//span[text()='6-01-01']")); //*[@id='tsrNeedsGrid']/div[2]/table/tbody/tr[1]/td[2]
         objFromRegistry701.click();
         Thread.sleep(2000);
-        WebElement choiceButton = getDriver().findElement(By.xpath("/html/body/div[29]/div/div/div/div[4]/button[2]"));//кнопка выбор
+        WebElement choiceButton = getDriver().findElement(By.xpath("//button[@ng-click='select()']"));//кнопка выбор
         choiceButton.click();
         Thread.sleep(2000);
-        WebElement typeOrderButton = getDriver().findElement(By.xpath("/html/body/div[27]/div/div/div[2]/div[3]/div[2]/core-combo/div/div/span/span/span"));//тип заказа
+        WebElement typeOrderButton = getDriver().findElement(By.xpath(".//div[@class='modal-content']//*[@combo-value='entity.purchaseTypeId']//*[@role='button']"));//тип заказа //div[3]/div[@class='col-xs-8 indent valError']//span[@class='k-select']
         typeOrderButton.click();
         Thread.sleep(2000);
-        WebElement productButton = getDriver().findElement(By.xpath("/html/body/div[28]/div/ul/li[1]")); //товар
+        WebElement productButton = getDriver().findElement(By.xpath("//ul[@role='listbox' and @aria-hidden='false']/li[text()='Товары']")); //товар /html/body/div[28]/div/ul/li[1]
         productButton.click();
     }
 
     public void setSubstantiationOfficer() throws InterruptedException {
         getLogger().getLogger().info("Ввести ответственных лиц. Ответственный за формирование обоснования");
-        WebElement elementSubstOfficersButton = getDriver().findElement(By.xpath("//*[@id=\"accordion7\"]/div/div[1]/h2"));
+        WebElement elementSubstOfficersButton = getDriver().findElement(By.xpath("//div[@id='accordion7']//span[@class='fa fa-angle-down']"));
         elementSubstOfficersButton.click();
         Thread.sleep(2000);
-        WebElement buttonAddSubstOfficer = getDriver().findElement(By.xpath("//*[@id=\"responsiblePersonGrid\"]/div[2]/table/tbody/tr[1]/td[4]/div/button"));
-        buttonAddSubstOfficer.click();
+        WebElement addSubstOfficerButton = getDriver().findElement(By.xpath("//tr[1]//button[contains(@ng-click,'addResponsiblePerson')]"));
+        addSubstOfficerButton.click();
         Thread.sleep(2000);
-        WebElement buttonResponsPerson = getDriver().findElement(By.xpath("/html/body/div[30]/div/div/div/div[2]/form/fieldset/div[2]/div[2]/core-link/div/div[1]/div/button"));
+        WebElement buttonResponsPerson = getDriver().findElement(By.xpath("//button[@ng-if='findVisible()']"));
         buttonResponsPerson.click();
         Thread.sleep(2000);
-        WebElement responsiblePerson = getDriver().findElement(By.xpath("//*[@id=\"responsiblePersonDialogGrid\"]/div[2]/table/tbody/tr/td[1]"));
+        WebElement responsiblePerson = getDriver().findElement(By.xpath("//*[@id='responsiblePersonDialogGrid']//span[text()='Семенов Егор Иванович']")); //*[@id='responsiblePersonDialogGrid']/div[2]/table/tbody/tr/td[1]
         responsiblePerson.click();
         Thread.sleep(2000);
-        WebElement buttonChoice2 = getDriver().findElement(By.xpath("/html/body/div[32]/div/div/div/div[4]/button[2]"));
+        WebElement buttonChoice2 = getDriver().findElement(By.xpath("//button[@ng-click='select()']"));
         buttonChoice2.click();
         Thread.sleep(2000);
-        WebElement saveChoice = getDriver().findElement(By.xpath("/html/body/div[30]/div/div/div/div[2]/form/fieldset/div[4]/div/button[1]"));
+        WebElement saveChoice = getDriver().findElement(By.xpath("//button[@ng-click='ok()']"));
         saveChoice.click();
         Thread.sleep(2000);
     }
 
     public void setProcurementOfficer() throws InterruptedException {
         getLogger().getLogger().info("Ввести ответственных лиц. Ответственный за проведение закупки");
-        WebElement buttonAddProcurementOfficer = getDriver().findElement(By.xpath("//*[@id=\"responsiblePersonGrid\"]/div[2]/table/tbody/tr[2]/td[4]/div/button"));
+        WebElement buttonAddProcurementOfficer = getDriver().findElement(By.xpath("//tr[2]//button[contains(@ng-click,'addResponsiblePerson')]"));
         buttonAddProcurementOfficer.click();
         Thread.sleep(2000);
-        WebElement buttonResponsPerson2 = getDriver().findElement(By.xpath("/html/body/div[31]/div/div/div/div[2]/form/fieldset/div[2]/div[2]/core-link/div/div[1]/div/button"));
+        WebElement buttonResponsPerson2 = getDriver().findElement(By.xpath("//button[@ng-if='findVisible()' and @ng-click='find()']"));
         buttonResponsPerson2.click();
         Thread.sleep(2000);
-        WebElement responsiblePerson2 = getDriver().findElement(By.xpath("//*[@id=\"responsiblePersonDialogGrid\"]/div[2]/table/tbody/tr/td[1]"));
+        WebElement responsiblePerson2 = getDriver().findElement(By.xpath("//*[@id='responsiblePersonDialogGrid']//span[text()='Семенов Егор Иванович']")); //*[@id='responsiblePersonDialogGrid']/div[2]/table/tbody/tr/td[1]
         responsiblePerson2.click();
         Thread.sleep(2000);
-        WebElement buttonChoice3 = getDriver().findElement(By.xpath("/html/body/div[33]/div/div/div/div[4]/button[2]"));
+        WebElement buttonChoice3 = getDriver().findElement(By.xpath("//button[@ng-click='select()']"));
         buttonChoice3.click();
         Thread.sleep(2000);
-        WebElement saveChoice2 = getDriver().findElement(By.xpath("/html/body/div[31]/div/div/div/div[2]/form/fieldset/div[4]/div/button[1]"));
+        WebElement saveChoice2 = getDriver().findElement(By.xpath("//button[@ng-click='ok()']"));
         saveChoice2.click();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
     }
 
     public void clickButtonAction() {
         getLogger().getLogger().info("Нажать на кнопку 'Действие'");
         WebElement button = getDriver().findElement(By.xpath("//*[@id=\"main\"]/div[2]/div/div/div[1]/div[2]/div/button"));
+        //Этот вариант отрабатывал для CreatePPZ - .//div[contains(@class, 'group pull-right')]//span[@class='caret']
+        //Этот вариант отрабатывал для ApprovalOfThePZ - //button[@type='button' and text()='Действие ']
         button.click();
     }
 
     public void clickButtonReadinessConfirmation() throws InterruptedException {
         getLogger().getLogger().info("Выбрать пункт 'Подтверждение готовности'");
-        WebElement buttonReadinessConfirm = getDriver().findElement(By.xpath("//*[@id=\"main\"]/div[2]/div/div/div[1]/div[2]/div/ul/li[2]/a"));
+        WebElement buttonReadinessConfirm = getDriver().findElement(By.xpath("//a[@ng-show='canPrepare()']"));
         buttonReadinessConfirm.click();
-        WebElement ReadinessConfirmation = getDriver().findElement(By.xpath("/html/body/div[32]/div/div/div[3]/button[2]"));
+        WebElement ReadinessConfirmation = getDriver().findElement(By.xpath("//button[@ng-click='btn2Click()']"));
         ReadinessConfirmation.click();
         Thread.sleep(3000);
     }
 
     public void setAuthorizedPerson(String surnameKey, String nameKey, String positionKey) throws InterruptedException {
         getLogger().getLogger().info("Ввести уполномоченное лицо: Фамилия, Имя, должность" + surnameKey + nameKey + positionKey);
-        WebElement buttonHead = getDriver().findElement(By.xpath("//*[@id=\"accordion8\"]/div[1]/h2"));
+        WebElement buttonHead = getDriver().findElement(By.xpath("//div[@id='accordion8']//span[@class='fa fa-angle-down']"));
         buttonHead.click();
         Thread.sleep(2000);
 
@@ -230,27 +229,30 @@ public class PlanPurchasePage extends BasePage {
 
     public void closeMessage() throws InterruptedException {
         getLogger().getLogger().info("Закрыть сообщение");
-        WebElement button = getDriver().findElement(By.xpath("/html/body/div[13]/div/div/div[3]/div/div[1]/div"));
+        WebElement button = getDriver().findElement(By.xpath("//*[@class='btn btn-default btn-message-read ng-binding']")); //проверить //div[contains(@ng-click,'toggleIsReaded')]
         button.click();
         Thread.sleep(2000);
     }
 
     public void setDetailKbk(String sumKey) throws InterruptedException {
         getLogger().getLogger().info("Ввести детализацию КБК" + sumKey);
-        WebElement elementDetailKBK = getDriver().findElement(By.xpath("//*[@id=\"accordion7\"]/div[1]/h2"));
+        WebElement elementDetailKBK = getDriver().findElement(By.xpath("//div[@id='accordion7']//span[@class='fa fa-angle-down']"));
         elementDetailKBK.click();
+        getLogger().getLogger().info("1й прошел");
         Thread.sleep(2000);
-        WebElement changeKBK = getDriver().findElement(By.xpath("//*[@id=\"accordion7\"]/div[1]/button[1]"));
+        WebElement changeKBK = getDriver().findElement(By.xpath("//button[@ng-click='changeKbkDetails($event)']"));
         changeKBK.click();
+        getLogger().getLogger().info("2й прошел");
         Thread.sleep(2000);
         WebElement field2019 = getDriver().findElement(LOCATOR_TXT_SUMKEY_FIELD_DETAIL_KBK);
         field2019.sendKeys(sumKey);
+        getLogger().getLogger().info("3й прошел");
         Thread.sleep(2000);
     }
 
     public void clickSendingForApproval() throws InterruptedException {
         getLogger().getLogger().info("Отправить на утверждение");
-        WebElement sendApprovButton = getDriver().findElement(By.xpath("//*[@id=\"main\"]/div[2]/div/div/div[1]/div[2]/div/ul/li[13]/a"));
+        WebElement sendApprovButton = getDriver().findElement(By.xpath("//a[contains(@ng-click, 'sendForApproval')]"));
         sendApprovButton.click();
         Thread.sleep(3000);
     }
@@ -264,7 +266,7 @@ public class PlanPurchasePage extends BasePage {
     public void clickTypePurchase() throws InterruptedException {
 
         getLogger().getLogger().info("Выбрать тип закупки"); //(8)
-        WebElement tipZak = getDriver().findElement(By.xpath("//*[@id=\"mainDataPanel\"]/div/form/fieldset/div[8]/div/div/core-combo/div/div/span/span/span"));
+        WebElement tipZak = getDriver().findElement(By.xpath("//div[1]/div[1]/core-combo[1]//div[1]//span[1 and @unselectable='on']//span[@role='button']"));
         Thread.sleep(2000);
         tipZak.click();
         WebElement vybor2 = getDriver().findElement(By.xpath("/html/body/div[30]/div/ul/li[5]"));
@@ -274,28 +276,28 @@ public class PlanPurchasePage extends BasePage {
 
     public void saveChangeButton() throws InterruptedException {
         getLogger().getLogger().info("Сохранить изменения");
-        WebElement saveChange = getDriver().findElement(By.xpath("//*[@id=\"accordion7\"]/div[1]/button[1]"));
+        WebElement saveChange = getDriver().findElement(By.xpath("//button[contains(@ng-click,'saveKbkDetails')]"));
         saveChange.click();
         Thread.sleep(2000);
     }
 
     public void saveChangeConfirmationButton() throws InterruptedException {
         getLogger().getLogger().info("Подтвердить сохранение изменений");
-        WebElement saveChangeConfirmation = getDriver().findElement(By.xpath("/html/body/div[13]/div/div/div[3]/button[2]"));
+        WebElement saveChangeConfirmation = getDriver().findElement(By.xpath("//button[@ng-click='btn2Click()']"));
         saveChangeConfirmation.click();
         Thread.sleep(2000);
     }
 
     public void saveSourceOfFundingButton() throws InterruptedException {
         getLogger().getLogger().info("Сохранить источник финансирования");
-        WebElement buttonSave = getDriver().findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[3]/button[2]"));
+        WebElement buttonSave = getDriver().findElement(By.xpath("//button[@class='btn btn-primary blue']"));
         buttonSave.click();
         Thread.sleep(2000);
     }
 
     public void savePlannedPurchaseObjectButton() throws InterruptedException {
         getLogger().getLogger().info("Сохранить планируемый объект закупки");
-        WebElement buttonSave = getDriver().findElement(By.xpath("/html/body/div[21]/div/div/div[2]/div[3]/button[2]"));
+        WebElement buttonSave = getDriver().findElement(By.xpath("//button[@class='btn btn-primary ng-scope']"));
         buttonSave.click();
         Thread.sleep(2000);
     }
