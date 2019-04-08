@@ -1,9 +1,6 @@
 package ru.granit.show.ui.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -60,6 +57,8 @@ public class PlanPurchasePage extends BasePage {
     public void setAuthorizedPerson(String surnameKey, String nameKey, String positionKey) throws InterruptedException {
         getLogger().getLogger().info("Ввести уполномоченное лицо: Фамилия, Имя, должность" + surnameKey + nameKey + positionKey);
         WebElement buttonHead = getDriver().findElement(By.xpath("//div[@id='accordion8']//span[@class='fa fa-angle-down']"));
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+        jse.executeScript("arguments[0].scrollIntoView(true);",buttonHead);
         buttonHead.click();
         Thread.sleep(2000);
 
@@ -83,8 +82,8 @@ public class PlanPurchasePage extends BasePage {
     }
 
     public void closeMessage() throws InterruptedException {
-        getLogger().getLogger().info("Закрыть сообщение");
-        WebElement button = getDriver().findElement(By.xpath("//*[@class='btn btn-default btn-message-read ng-binding']")); //проверить //div[contains(@ng-click,'toggleIsReaded')]
+        getLogger().getLogger().info("Закрыть сообщение"); //*[@class='btn btn-default btn-message-read ng-binding']
+        WebElement button = getDriver().findElement(By.xpath("//div[contains(@ng-click,'toggleIsReaded')]"));
         button.click();
         Thread.sleep(2000);
     }
@@ -92,6 +91,8 @@ public class PlanPurchasePage extends BasePage {
     public void setDetailKbk(String sumKey) throws InterruptedException {
         getLogger().getLogger().info("Ввести детализацию КБК" + sumKey);
         WebElement elementDetailKBK = getDriver().findElement(By.xpath("//div[@id='accordion7']//span[@class='fa fa-angle-down']"));
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+        jse.executeScript("window.scrollBy(0,-300)", "");
         elementDetailKBK.click();
         Thread.sleep(2000);
         WebElement changeKBK = getDriver().findElement(By.xpath("//button[@ng-click='changeKbkDetails($event)']"));

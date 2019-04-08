@@ -30,18 +30,9 @@ public class ApprovalOfThePZ extends BaseTest {
         Assert.assertEquals(planPurchasePage.getRegistryPlanPurchaseNumber(), registryNumber,
                 "Реестровый номер плана закупок - верный");
 
-        getLogger().info("Scroll down");
-        JavascriptExecutor jse = (JavascriptExecutor) webDriver;
-        jse.executeScript("window.scrollBy(0,900)", "");
-        Thread.sleep(2000);
-
         planPurchasePage.setAuthorizedPerson(surnameKey, nameKey, positionKey);
 
         planPurchasePage.savePlan();
-
-        getLogger().info("Scroll up");
-        jse.executeScript("window.scrollBy(0,-800)", "");
-        Thread.sleep(2000);
 
         planPurchasePage.setDetailKbk(sumKey);
 

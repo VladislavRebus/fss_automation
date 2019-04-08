@@ -1,9 +1,6 @@
 package ru.granit.show.ui.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -65,14 +62,16 @@ public class PlanPurchaseSpecificationPage extends BasePage {
     }
 
     public void setIntroduceJustificationObject(String justification) throws InterruptedException {
-        getLogger().getLogger().info("Ввести обоснование соответствия объекта: " + justification);//(12)
+        getLogger().getLogger().info("Ввести обоснование соответствия объекта: " + justification);
         WebElement justificationObj = getDriver().findElement(LOCATOR_TXT_INTRODUCE_JUSTIFICATION);
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+        jse.executeScript("arguments[0].scrollIntoView(true);", justificationObj); //пробую использовать скролл1
         justificationObj.sendKeys(justification);
         Thread.sleep(2000);
     }
 
     public void setSpecifyTimeAndFrequencyDelivery(String time2) throws InterruptedException {
-        getLogger().getLogger().info("Ввести срок и периодичность поставки: " + time2);//(14)
+        getLogger().getLogger().info("Ввести срок и периодичность поставки: " + time2);
         WebElement checkBoxTime = getDriver().findElement(By.xpath("//*[@id=\"deliveryTerm\"]//input[contains(@ng-model,'isDelivery')]"));
         checkBoxTime.click();
         Thread.sleep(2000);
@@ -84,26 +83,29 @@ public class PlanPurchaseSpecificationPage extends BasePage {
     public void setIntroduceNameObjectPurchase(String nameObjectPurch) throws InterruptedException {
         getLogger().getLogger().info("Ввести наименование объекта или объектов закупки: " + nameObjectPurch);
         WebElement nameObjectPurchaseElement = getDriver().findElement(LOCATOR_TXT_INTRODUCE_NAME_OBJECT_PURCHASE);
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+        jse.executeScript("arguments[0].scrollIntoView(true);", nameObjectPurchaseElement); //пробую использовать скролл2
+        jse.executeScript("window.scrollBy(0,50)", "");//поднял чуть выше, т.к. не видно элемента на экране
         nameObjectPurchaseElement.sendKeys(nameObjectPurch);
         Thread.sleep(2000);
     }
 
     public void addSourceFunding(String sum) throws InterruptedException {
-        getLogger().getLogger().info("Добавить источник финансирования (16)");
+        getLogger().getLogger().info("Добавить источник финансирования");
         WebElement sourceFundButton = getDriver().findElement(By.xpath("//button[text()='Добавить источник финансирования']"));
         sourceFundButton.click();
         Thread.sleep(2000);
         WebElement yearButton = getDriver().findElement(By.xpath(".//div[@class='modal-content']//*[@combo-value='kbkYear']//*[@role='button']"));
         yearButton.click();
         Thread.sleep(2000);
-        WebElement year2019Button = getDriver().findElement(By.xpath("//ul[@role='listbox' and @aria-hidden='false']/li[text()='2019']")); //html/body/div[22]/div/ul/li[1]
+        WebElement year2019Button = getDriver().findElement(By.xpath("//ul[@role='listbox' and @aria-hidden='false']/li[text()='2019']"));
         year2019Button.click();
         Thread.sleep(2000);
         WebElement kbkButton = getDriver().findElement(By.xpath(".//div[@class='modal-content']" +
                 "//*[@combo-display-field='internalCode' and @combo-value='kbkFixedValuesBind']//*[@role='button']"));
         kbkButton.click();
         Thread.sleep(2000);
-        WebElement kbk149346Button = getDriver().findElement(By.xpath("//ul[@role='listbox' and @aria-hidden='false']/li[text()='393-0113-0370290059/1-149-346']")); //html/body/div[24]/div/ul/li[1]
+        WebElement kbk149346Button = getDriver().findElement(By.xpath("//ul[@role='listbox' and @aria-hidden='false']/li[text()='393-0113-0370290059/1-149-346']"));
         kbk149346Button.click();
         Thread.sleep(2000);
         WebElement personalAccountButton = getDriver().findElement(By.xpath(".//div[@class='modal-content']//*[contains(@combo-value, 'entityForCreation')]//*[@role='button']")); //лицевой счет
@@ -132,16 +134,16 @@ public class PlanPurchaseSpecificationPage extends BasePage {
         WebElement potrIzReestraButton = getDriver().findElement(By.xpath("//div[1]/div[contains(@class, 'indent')]//button[contains(@class, 'ng-scope')]"));
         potrIzReestraButton.click();
         Thread.sleep(2000);
-        WebElement objFromRegistry701 = getDriver().findElement(By.xpath("//*[@id='tsrNeedsGrid']//tr[@class='ng-scope']//td[@role='gridcell']//span[text()='6-01-01']")); //*[@id='tsrNeedsGrid']/div[2]/table/tbody/tr[1]/td[2]
+        WebElement objFromRegistry701 = getDriver().findElement(By.xpath("//*[@id='tsrNeedsGrid']//tr[@class='ng-scope']//td[@role='gridcell']//span[text()='6-01-01']"));
         objFromRegistry701.click();
         Thread.sleep(2000);
         WebElement choiceButton = getDriver().findElement(By.xpath("//button[@ng-click='select()']"));//кнопка выбор
         choiceButton.click();
         Thread.sleep(2000);
-        WebElement typeOrderButton = getDriver().findElement(By.xpath(".//div[@class='modal-content']//*[@combo-value='entity.purchaseTypeId']//*[@role='button']"));//тип заказа //div[3]/div[@class='col-xs-8 indent valError']//span[@class='k-select']
+        WebElement typeOrderButton = getDriver().findElement(By.xpath(".//div[@class='modal-content']//*[@combo-value='entity.purchaseTypeId']//*[@role='button']"));//тип заказа
         typeOrderButton.click();
         Thread.sleep(2000);
-        WebElement productButton = getDriver().findElement(By.xpath("//ul[@role='listbox' and @aria-hidden='false']/li[text()='Товары']")); //товар /html/body/div[28]/div/ul/li[1]
+        WebElement productButton = getDriver().findElement(By.xpath("//ul[@role='listbox' and @aria-hidden='false']/li[text()='Товары']")); //товар
         productButton.click();
     }
 
@@ -155,6 +157,8 @@ public class PlanPurchaseSpecificationPage extends BasePage {
     public void setSubstantiationOfficer() throws InterruptedException {
         getLogger().getLogger().info("Ввести ответственных лиц. Ответственный за формирование обоснования");
         WebElement elementSubstOfficersButton = getDriver().findElement(By.xpath("//div[@id='accordion7']//span[@class='fa fa-angle-down']"));
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+        jse.executeScript("arguments[0].scrollIntoView(true);", elementSubstOfficersButton); //пробую использовать скролл3
         elementSubstOfficersButton.click();
         Thread.sleep(2000);
         WebElement addSubstOfficerButton = getDriver().findElement(By.xpath("//tr[1]//button[contains(@ng-click,'addResponsiblePerson')]"));
@@ -163,7 +167,7 @@ public class PlanPurchaseSpecificationPage extends BasePage {
         WebElement buttonResponsPerson = getDriver().findElement(By.xpath("//button[@ng-if='findVisible()']"));
         buttonResponsPerson.click();
         Thread.sleep(2000);
-        WebElement responsiblePerson = getDriver().findElement(By.xpath("//*[@id='responsiblePersonDialogGrid']//span[text()='Семенов Егор Иванович']")); //*[@id='responsiblePersonDialogGrid']/div[2]/table/tbody/tr/td[1]
+        WebElement responsiblePerson = getDriver().findElement(By.xpath("//*[@id='responsiblePersonDialogGrid']//span[text()='Семенов Егор Иванович']"));
         responsiblePerson.click();
         Thread.sleep(2000);
         WebElement buttonChoice2 = getDriver().findElement(By.xpath("//button[@ng-click='select()']"));
@@ -182,7 +186,7 @@ public class PlanPurchaseSpecificationPage extends BasePage {
         WebElement buttonResponsPerson2 = getDriver().findElement(By.xpath("//button[@ng-if='findVisible()' and @ng-click='find()']"));
         buttonResponsPerson2.click();
         Thread.sleep(2000);
-        WebElement responsiblePerson2 = getDriver().findElement(By.xpath("//*[@id='responsiblePersonDialogGrid']//span[text()='Семенов Егор Иванович']")); //*[@id='responsiblePersonDialogGrid']/div[2]/table/tbody/tr/td[1]
+        WebElement responsiblePerson2 = getDriver().findElement(By.xpath("//*[@id='responsiblePersonDialogGrid']//span[text()='Семенов Егор Иванович']"));
         responsiblePerson2.click();
         Thread.sleep(2000);
         WebElement buttonChoice3 = getDriver().findElement(By.xpath("//button[@ng-click='select()']"));

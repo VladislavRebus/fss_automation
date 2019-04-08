@@ -22,7 +22,6 @@ public class CreatePPZ extends BaseTest {
         LoginPage loginPage = new LoginPage(getDriver());
         Assert.assertTrue(loginPage.isOpened(BasePage.DEFAULT_PAGE_TIMEOUT), loginPage.getPageName() + " is opened");
         loginPage.login(login, password);
-        //Thread.sleep(2000);
 
         PlanPurchasePage planPurchasePage = new PlanPurchasePage(webDriver);
         PlanPurchaseSpecificationPage planPurchaseSpecificationPage = new PlanPurchaseSpecificationPage(webDriver);
@@ -33,7 +32,8 @@ public class CreatePPZ extends BaseTest {
 
         planPurchasePage.clickButtonOnCreatePurchaseObject();
 
-        Assert.assertTrue(planPurchaseSpecificationPage.isOpened(BasePage.DEFAULT_PAGE_TIMEOUT), planPurchaseSpecificationPage.getPageName() + "открыта");
+        Assert.assertTrue(planPurchaseSpecificationPage.isOpened(BasePage.DEFAULT_PAGE_TIMEOUT),
+                planPurchaseSpecificationPage.getPageName() + "открыта");
 
         planPurchaseSpecificationPage.savePlan();
         planPurchaseSpecificationPage.closeAlert();
@@ -48,10 +48,6 @@ public class CreatePPZ extends BaseTest {
         planPurchaseSpecificationPage.savePlan();
         planPurchaseSpecificationPage.closeAlert();
 
-        getLogger().info("Scroll down");
-        JavascriptExecutor jse = (JavascriptExecutor) webDriver;
-        jse.executeScript("window.scrollBy(0,900)", "");
-
         planPurchaseSpecificationPage.setIntroduceJustificationObject(justification);
 
         planPurchaseSpecificationPage.savePlan();
@@ -62,14 +58,10 @@ public class CreatePPZ extends BaseTest {
         planPurchaseSpecificationPage.savePlan();
         planPurchaseSpecificationPage.closeAlert();
 
-        getLogger().info("Scroll up");
-        jse.executeScript("window.scrollBy(0,-800)", "");
-        Thread.sleep(2000);
-
         planPurchaseSpecificationPage.setIntroduceNameObjectPurchase(nameObjectPurch);
 
         planPurchaseSpecificationPage.savePlan();
-        Thread.sleep(4000);
+        Thread.sleep(1000);
 
         planPurchaseSpecificationPage.addSourceFunding(sum);
         planPurchaseSpecificationPage.saveSourceOfFundingButton();
@@ -77,20 +69,10 @@ public class CreatePPZ extends BaseTest {
         planPurchaseSpecificationPage.clickOnCreatePurchaseObjectButton2();
         planPurchaseSpecificationPage.savePlannedPurchaseObjectButton();
 
-        getLogger().info("Scroll down");
-        jse.executeScript("window.scrollBy(0,1000)", "");
-        Thread.sleep(2000);
-
         planPurchaseSpecificationPage.setSubstantiationOfficer();
-
-        getLogger().info("Scroll down");
-        jse.executeScript("window.scrollBy(0,400)", "");
-        Thread.sleep(2000);
-
         planPurchaseSpecificationPage.setProcurementOfficer();
 
         planPurchaseSpecificationPage.clickButtonAction();
-
         planPurchaseSpecificationPage.clickButtonReadinessConfirmation();
         // planPurchasePage.closeMessage();
     }

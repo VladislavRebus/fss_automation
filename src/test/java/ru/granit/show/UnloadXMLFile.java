@@ -17,7 +17,6 @@ public class UnloadXMLFile extends BaseTest {
         LoginPage loginPage = new LoginPage(getDriver());
         Assert.assertTrue(loginPage.isOpened(BasePage.DEFAULT_PAGE_TIMEOUT), loginPage.getPageName() + " is opened");
         loginPage.login(login, password);
-
         Thread.sleep(2000);
 
         PlanPurchasePage planPurchasePage = new PlanPurchasePage(webDriver);
