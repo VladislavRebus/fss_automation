@@ -1,8 +1,6 @@
 package ru.granit.show;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.granit.show.ui.pages.*;
@@ -11,7 +9,6 @@ public class ApprovalOfThePZ extends BaseTest {
 
     private final String login = "saratovsch";
     private final String password = "SHETKO1990";
-
     private final String registryNumber = "000060-19";
     private final String surnameKey = "Максимов";
     private final String nameKey = "Максим";

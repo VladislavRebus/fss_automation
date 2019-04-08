@@ -1,8 +1,6 @@
 package ru.granit.show;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.granit.show.ui.pages.*;
@@ -11,7 +9,6 @@ public class CreatePPZ extends BaseTest {
 
     private final String login = "saratovsch";
     private final String password = "SHETKO1990";
-
     private final String registryNumber = "000060-19";
     private final String numIKZ = "3301";
     private final String justification = "Прямая необходимость";
@@ -25,71 +22,76 @@ public class CreatePPZ extends BaseTest {
         LoginPage loginPage = new LoginPage(getDriver());
         Assert.assertTrue(loginPage.isOpened(BasePage.DEFAULT_PAGE_TIMEOUT), loginPage.getPageName() + " is opened");
         loginPage.login(login, password);
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
 
         PlanPurchasePage planPurchasePage = new PlanPurchasePage(webDriver);
+        PlanPurchaseSpecificationPage planPurchaseSpecificationPage = new PlanPurchaseSpecificationPage(webDriver);
+
+        Assert.assertTrue(planPurchasePage.isOpened(BasePage.DEFAULT_PAGE_TIMEOUT), planPurchasePage.getPageName() + " открыта");
         Assert.assertEquals(planPurchasePage.getRegistryPlanPurchaseNumber(), registryNumber,
                 "Реестровый номер плана закупок - верный");
 
         planPurchasePage.clickButtonOnCreatePurchaseObject();
 
-        planPurchasePage.savePlan();
-        planPurchasePage.closeAlert();
+        Assert.assertTrue(planPurchaseSpecificationPage.isOpened(BasePage.DEFAULT_PAGE_TIMEOUT), planPurchaseSpecificationPage.getPageName() + "открыта");
 
-        planPurchasePage.setSerialNumberIKZ(numIKZ);
+        planPurchaseSpecificationPage.savePlan();
+        planPurchaseSpecificationPage.closeAlert();
 
-        planPurchasePage.savePlan();
-        planPurchasePage.closeAlert();
+        planPurchaseSpecificationPage.setSerialNumberIKZ(numIKZ);
 
-        planPurchasePage.setPlannedPlacementYear();
+        planPurchaseSpecificationPage.savePlan();
+        planPurchaseSpecificationPage.closeAlert();
 
-        planPurchasePage.savePlan();
-        planPurchasePage.closeAlert();
+        planPurchaseSpecificationPage.setPlannedPlacementYear();
+
+        planPurchaseSpecificationPage.savePlan();
+        planPurchaseSpecificationPage.closeAlert();
 
         getLogger().info("Scroll down");
         JavascriptExecutor jse = (JavascriptExecutor) webDriver;
         jse.executeScript("window.scrollBy(0,900)", "");
 
-        planPurchasePage.setIntroduceJustificationObject(justification);
+        planPurchaseSpecificationPage.setIntroduceJustificationObject(justification);
 
-        planPurchasePage.savePlan();
-        planPurchasePage.closeAlert();
+        planPurchaseSpecificationPage.savePlan();
+        planPurchaseSpecificationPage.closeAlert();
 
-        planPurchasePage.setSpecifyTimeAndFrequencyDelivery(time2);
+        planPurchaseSpecificationPage.setSpecifyTimeAndFrequencyDelivery(time2);
 
-        planPurchasePage.savePlan();
-        planPurchasePage.closeAlert();
+        planPurchaseSpecificationPage.savePlan();
+        planPurchaseSpecificationPage.closeAlert();
 
         getLogger().info("Scroll up");
         jse.executeScript("window.scrollBy(0,-800)", "");
         Thread.sleep(2000);
 
-        planPurchasePage.setIntroduceNameObjectPurchase(nameObjectPurch);
+        planPurchaseSpecificationPage.setIntroduceNameObjectPurchase(nameObjectPurch);
 
-        planPurchasePage.savePlan();
+        planPurchaseSpecificationPage.savePlan();
         Thread.sleep(4000);
 
-        planPurchasePage.addSourceFunding(sum);
-        planPurchasePage.saveSourceOfFundingButton();
+        planPurchaseSpecificationPage.addSourceFunding(sum);
+        planPurchaseSpecificationPage.saveSourceOfFundingButton();
 
-        planPurchasePage.clickOnCreatePurchaseObjectButton2();
-        planPurchasePage.savePlannedPurchaseObjectButton();
+        planPurchaseSpecificationPage.clickOnCreatePurchaseObjectButton2();
+        planPurchaseSpecificationPage.savePlannedPurchaseObjectButton();
 
         getLogger().info("Scroll down");
         jse.executeScript("window.scrollBy(0,1000)", "");
         Thread.sleep(2000);
 
-        planPurchasePage.setSubstantiationOfficer();
+        planPurchaseSpecificationPage.setSubstantiationOfficer();
 
         getLogger().info("Scroll down");
         jse.executeScript("window.scrollBy(0,400)", "");
         Thread.sleep(2000);
 
-        planPurchasePage.setProcurementOfficer();
+        planPurchaseSpecificationPage.setProcurementOfficer();
 
-        planPurchasePage.clickButtonAction();
+        planPurchaseSpecificationPage.clickButtonAction();
 
-        planPurchasePage.clickButtonReadinessConfirmation();
-       // planPurchasePage.closeMessage();
+        planPurchaseSpecificationPage.clickButtonReadinessConfirmation();
+        // planPurchasePage.closeMessage();
     }
 }

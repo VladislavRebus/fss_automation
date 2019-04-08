@@ -47,6 +47,5 @@ public class UnloadingPrintedFormsPZ extends BaseTest {
         planPurchasePage.clickButtonAction();
         getLogger().info("Сформировать обоснование по 555ПП.Excel");
         planPurchasePage.clickLoadingForm(10);
-        Thread.sleep(3000);
     }
 }

@@ -5,7 +5,7 @@ import ru.granit.show.TestLogger;
 
 public abstract class BasePage {
 
-    public static final int DEFAULT_PAGE_TIMEOUT = 3;
+    public static final int DEFAULT_PAGE_TIMEOUT = 4;
 
     private final String pageName;
     private final WebDriver driver;
